@@ -8,9 +8,6 @@ class GameWindow < Gosu::Window
       self, 'Hello, World!', Gosu.default_font_name, 30)
   end
 
-  def update
-  end
-
   def draw
     @message.draw(10, 10, 0)
   end
