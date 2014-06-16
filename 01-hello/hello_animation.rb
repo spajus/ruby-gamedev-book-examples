@@ -1,9 +1,12 @@
 require 'gosu'
 
+def media_path(file)
+  File.join(File.dirname(__FILE__), 'media', file)
+end
+
 class Explosion
   FRAME_DELAY = 10 # ms
-  SPRITE = File.join(File.dirname(__FILE__),
-                     'media/explosion.png')
+  SPRITE = media_path('explosion.png')
 
   def self.load_animation(window)
     Gosu::Image.load_tiles(
@@ -14,48 +17,63 @@ class Explosion
     @animation = animation
     @x, @y = x, y
     @current_frame = 0
-    @last_frame_time = Gosu.milliseconds
+  end
+
+  def update
+    @current_frame += 1 if frame_expired?
   end
 
   def draw
-    if (Gosu.milliseconds - @last_frame_time) > FRAME_DELAY
-      @current_frame += 1
-      @last_frame_time = Gosu.milliseconds
-      @done ||= @current_frame == @animation.size
-    end
     return if done?
-    image = @animation[@current_frame % @animation.size]
-    image.draw(@x - image.width / 2.0,
-               @y - image.height / 2.0,
-               0)
+    image = current_frame
+    image.draw(
+      @x - image.width / 2.0,
+      @y - image.height / 2.0,
+      0)
   end
 
   def done?
-    @done
+    @done ||= @current_frame == @animation.size
+  end
+
+  private
+
+  def current_frame
+    @animation[@current_frame % @animation.size]
+  end
+
+  def frame_expired?
+    now = Gosu.milliseconds
+    @last_frame ||= now
+    if (now - @last_frame) > FRAME_DELAY
+      @last_frame = now
+    end
   end
 end
 
 class GameWindow < Gosu::Window
-  BACKGROUND = File.join(File.dirname(__FILE__),
-                         'media/country_field.png')
+  BACKGROUND = media_path('country_field.png')
 
   def initialize(width=800, height=600, fullscreen=false)
     super
     self.caption = 'Hello Animation'
-    @background = Gosu::Image.new(self, BACKGROUND, false)
+    @background = Gosu::Image.new(
+      self, BACKGROUND, false)
     @animation = Explosion.load_animation(self)
     @explosions = []
   end
 
   def update
     @explosions.reject!(&:done?)
+    @explosions.map(&:update)
   end
 
   def button_down(id)
     close if id == Gosu::KbEscape
     if id == Gosu::MsLeft
       @explosions.push(
-        Explosion.new(@animation, mouse_x, mouse_y))
+        Explosion.new(
+          @animation, mouse_x, mouse_y))
     end
   end
 
