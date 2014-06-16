@@ -1,33 +1,33 @@
 require 'gosu'
 
 class Explosion
+  FRAME_DELAY = 10 # ms
   SPRITE = File.join(File.dirname(__FILE__),
                      'media/explosion.png')
 
   def self.load_animation(window)
-    Gosu::Image.load_tiles(window, SPRITE, 128, 128, false)
+    Gosu::Image.load_tiles(
+      window, SPRITE, 128, 128, false)
   end
 
   def initialize(animation, x, y)
     @animation = animation
-    @x = x
-    @y = y
+    @x, @y = x, y
     @current_frame = 0
-    @delay = 10 #ms
     @last_frame_time = Gosu.milliseconds
   end
 
   def draw
-    if (Gosu.milliseconds - @last_frame_time) > @delay
+    if (Gosu.milliseconds - @last_frame_time) > FRAME_DELAY
       @current_frame += 1
       @last_frame_time = Gosu.milliseconds
       @done ||= @current_frame == @animation.size
     end
     return if done?
-    img = @animation[@current_frame % @animation.size]
-    img.draw(@x - img.width / 2.0,
-             @y - img.height / 2.0,
-             0)
+    image = @animation[@current_frame % @animation.size]
+    image.draw(@x - image.width / 2.0,
+               @y - image.height / 2.0,
+               0)
   end
 
   def done?
@@ -42,11 +42,9 @@ class GameWindow < Gosu::Window
   def initialize(width=800, height=600, fullscreen=false)
     super
     self.caption = 'Hello Animation'
-    @x = @y = 10
-    @animation = Explosion.load_animation(self)
     @background = Gosu::Image.new(self, BACKGROUND, false)
+    @animation = Explosion.load_animation(self)
     @explosions = []
-    @buttons_down = 0
   end
 
   def update
@@ -56,7 +54,8 @@ class GameWindow < Gosu::Window
   def button_down(id)
     close if id == Gosu::KbEscape
     if id == Gosu::MsLeft
-      @explosions.push Explosion.new(@animation, mouse_x, mouse_y)
+      @explosions.push(
+        Explosion.new(@animation, mouse_x, mouse_y))
     end
   end
 
