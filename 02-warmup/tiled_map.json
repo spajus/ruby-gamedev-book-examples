@@ -1,0 +1,65 @@
+{ "height":10,
+ "layers":[
+        {
+         "data":[65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65],
+         "height":10,
+         "name":"Water",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        },
+        {
+         "data":[0, 0, 7, 5, 57, 43, 0, 0, 0, 0, 0, 0, 28, 1, 1, 42, 0, 0, 0, 0, 0, 0, 44, 1, 1, 42, 0, 0, 0, 0, 0, 0, 28, 1, 1, 27, 43, 0, 0, 0, 0, 0, 28, 1, 1, 1, 27, 43, 0, 0, 0, 0, 28, 1, 1, 1, 59, 16, 0, 0, 0, 0, 48, 62, 61, 61, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":10,
+         "name":"Ground",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "tileheight":128,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"media\/ground.png",
+         "imageheight":1024,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"ground",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":128,
+         "tilewidth":128
+        },
+        {
+         "firstgid":65,
+         "image":"media\/water.png",
+         "imageheight":128,
+         "imagewidth":128,
+         "margin":0,
+         "name":"water",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":128,
+         "tilewidth":128
+        }],
+ "tilewidth":128,
+ "version":1,
+ "width":10
+}
