@@ -14,7 +14,7 @@ class GameWindow < Gosu::Window
     super(WIDTH, HEIGHT, false)
     self.caption = 'Random Map'
     @tileset = Gosu::TexturePacker.load_json(
-      self, media_path('ground.json'))
+      self, media_path('ground.json'), :precise)
     @redraw = true
   end
 
