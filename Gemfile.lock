@@ -2,10 +2,13 @@ GEM
   remote: https://rubygems.org/
   specs:
     gosu (0.7.50)
-    gosu_texture_packer (0.1.3)
+    gosu_texture_packer (0.1.4)
       gosu
       json
       rmagick
+    gosu_tiled (0.1.1)
+      gosu
+      json
     json (1.8.1)
     rake (10.3.2)
     rmagick (2.13.2)
@@ -16,4 +19,5 @@ PLATFORMS
 DEPENDENCIES
   gosu
   gosu_texture_packer
+  gosu_tiled
   rake
