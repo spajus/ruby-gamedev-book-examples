@@ -10,6 +10,7 @@ GEM
       gosu
       json
     json (1.8.1)
+    perlin_noise (0.1.2)
     rake (10.3.2)
     rmagick (2.13.2)
 
@@ -20,4 +21,5 @@ DEPENDENCIES
   gosu
   gosu_texture_packer
   gosu_tiled
+  perlin_noise
   rake
