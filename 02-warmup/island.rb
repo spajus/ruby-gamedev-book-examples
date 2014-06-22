@@ -9,6 +9,7 @@ class GameWindow < Gosu::Window
     super(640, 480, false)
     @map = Gosu::Tiled.load_json(self, MAP_FILE)
     @x = @y = 0
+    @first_render = true
   end
 
   def button_down(id)
@@ -24,6 +25,7 @@ class GameWindow < Gosu::Window
   end
 
   def draw
+    @first_render = false
     @map.draw(@x, @y)
   end
 
@@ -31,7 +33,7 @@ class GameWindow < Gosu::Window
     [Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp, Gosu::KbDown].each do |b|
       return true if button_down?(b)
     end
-    false
+    false || @first_render
   end
 end
 
