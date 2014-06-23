@@ -17,10 +17,9 @@ class Tank
   end
 
   def update
-    @gun_angle = change_angle(@gun_angle,
-      Gosu::KbW, Gosu::KbS, Gosu::KbA, Gosu::KbD)
+    @gun_angle = -Math.atan2(320 - @window.mouse_x, 240 - @window.mouse_y) * 180 / Math::PI
     @body_angle = change_angle(@body_angle,
-      Gosu::KbUp, Gosu::KbDown, Gosu::KbLeft, Gosu::KbRight)
+      Gosu::KbW, Gosu::KbS, Gosu::KbA, Gosu::KbD)
   end
 
   def draw
@@ -73,6 +72,10 @@ class GameWindow < Gosu::Window
     @buttons_down = 0
   end
 
+  def needs_cursor?
+    true
+  end
+
   def button_down(id)
     close if id == Gosu::KbEscape
     @buttons_down += 1
@@ -83,22 +86,18 @@ class GameWindow < Gosu::Window
   end
 
   def update
-    @x -= SPEED if button_down?(Gosu::KbLeft)
-    @x += SPEED if button_down?(Gosu::KbRight)
-    @y -= SPEED if button_down?(Gosu::KbUp)
-    @y += SPEED if button_down?(Gosu::KbDown)
+    @x -= SPEED if button_down?(Gosu::KbA)
+    @x += SPEED if button_down?(Gosu::KbD)
+    @y -= SPEED if button_down?(Gosu::KbW)
+    @y += SPEED if button_down?(Gosu::KbS)
     @tank.update
-    self.caption = "#{Gosu.fps} FPS. Use arrow keys to pan"
+    self.caption = "#{Gosu.fps} FPS. Use WASD and mouse to control tank"
   end
 
   def draw
     @first_render = false
     @map.draw(@x, @y)
     @tank.draw()
-  end
-
-  def needs_redraw?
-    @first_render || @buttons_down > 0
   end
 end
 
