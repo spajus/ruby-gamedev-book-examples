@@ -33,7 +33,7 @@ class GameWindow < Gosu::Window
     [Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp, Gosu::KbDown].each do |b|
       return true if button_down?(b)
     end
-    false || @first_render
+    @first_render
   end
 end
 
