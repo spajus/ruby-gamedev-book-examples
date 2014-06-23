@@ -17,7 +17,9 @@ class Tank
   end
 
   def update
-    @gun_angle = -Math.atan2(320 - @window.mouse_x, 240 - @window.mouse_y) * 180 / Math::PI
+    atan = Math.atan2(320 - @window.mouse_x,
+                      240 - @window.mouse_y)
+    @gun_angle = -atan * 180 / Math::PI
     @body_angle = change_angle(@body_angle,
       Gosu::KbW, Gosu::KbS, Gosu::KbA, Gosu::KbD)
   end
