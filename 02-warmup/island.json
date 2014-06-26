@@ -669,7 +669,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"media\/ground.png",
+         "image":"..\/media\/ground.png",
          "imageheight":1024,
          "imagewidth":1024,
          "margin":0,
@@ -691,7 +691,7 @@
         },
         {
          "firstgid":65,
-         "image":"media\/water.png",
+         "image":"..\/media\/water.png",
          "imageheight":128,
          "imagewidth":128,
          "margin":0,
@@ -714,7 +714,7 @@
         },
         {
          "firstgid":66,
-         "image":"media\/trees.png",
+         "image":"..\/media\/trees.png",
          "imageheight":704,
          "imagewidth":704,
          "margin":0,

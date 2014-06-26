@@ -55,9 +55,10 @@ class Tank
 end
 
 class GameWindow < Gosu::Window
-  MAP_FILE = File.join(File.dirname(__FILE__), 'island.json')
-  UNIT_FILE = File.join(File.dirname(__FILE__),
-                        'media', 'ground_units.json')
+  MAP_FILE = File.join(File.dirname(
+    __FILE__), 'island.json')
+  UNIT_FILE = File.join(File.dirname(File.dirname(
+    __FILE__)), 'media', 'ground_units.json')
   SPEED = 5
 
   def initialize
@@ -93,7 +94,8 @@ class GameWindow < Gosu::Window
     @y -= SPEED if button_down?(Gosu::KbW)
     @y += SPEED if button_down?(Gosu::KbS)
     @tank.update
-    self.caption = "#{Gosu.fps} FPS. Use WASD and mouse to control tank"
+    self.caption = "#{Gosu.fps} FPS. " <<
+      'Use WASD and mouse to control tank'
   end
 
   def draw

@@ -2,7 +2,8 @@ require 'gosu'
 require 'gosu_texture_packer'
 
 def media_path(file)
-  File.join(File.dirname(__FILE__), 'media', file)
+  File.join(File.dirname(File.dirname(
+    __FILE__)), 'media', file)
 end
 
 class GameWindow < Gosu::Window

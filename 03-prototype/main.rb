@@ -6,7 +6,8 @@ require_relative 'game_window'
 
 module Game
   def self.media_path(file)
-    File.join(File.dirname(__FILE__), 'media', file)
+    File.join(File.dirname(File.dirname(
+      __FILE__)), 'media', file)
   end
 end
 

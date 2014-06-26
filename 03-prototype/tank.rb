@@ -1,15 +1,11 @@
 class Tank
   attr_accessor :x, :y, :body_angle, :gun_angle
-
-  UNIT_FILE = File.join(File.dirname(__FILE__),
-                        'media', 'ground_units.json')
-
   SHOOT_DELAY = 500
 
   def initialize(map)
     @map = map
     @units = Gosu::TexturePacker.load_json(
-      $window, UNIT_FILE, :precise)
+      $window, Game.media_path('ground_units.json'), :precise)
     @body = @units.frame('tank1_body.png')
     @shadow = @units.frame('tank1_body_shadow.png')
     @gun = @units.frame('tank1_dualgun.png')
@@ -18,6 +14,9 @@ class Tank
     @gun_angle = 0.0
     @last_shot = 0
     sound.volume = 0.3
+  end
+
+  def unit_file
   end
 
   def sound

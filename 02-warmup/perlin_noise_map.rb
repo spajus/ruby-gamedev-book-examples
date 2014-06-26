@@ -3,7 +3,8 @@ require 'gosu_texture_packer'
 require 'perlin_noise'
 
 def media_path(file)
-  File.join(File.dirname(__FILE__), 'media', file)
+  File.join(File.dirname(File.dirname(
+    __FILE__)), 'media', file)
 end
 
 class GameWindow < Gosu::Window
