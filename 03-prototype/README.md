@@ -4,4 +4,4 @@ This is a prototype of Tanks game that was built while writing [Developing Games
 
 ## Video
 
-![http://img.youtube.com/vi/ZP5y63JIXfc/0.jpg](https://www.youtube.com/watch?v=ZP5y63JIXfc)
+[![Click to watch on YouTube](http://img.youtube.com/vi/ZP5y63JIXfc/0.jpg)](https://www.youtube.com/watch?v=ZP5y63JIXfc)
