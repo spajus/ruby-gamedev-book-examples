@@ -15,8 +15,11 @@ class Camera
 
   def mouse_coords
     x, y = target_delta_on_screen
-    [@target.x + (x + $window.mouse_x - ($window.width / 2)) / @zoom,
-     @target.y + (y + $window.mouse_y - ($window.height / 2)) / @zoom].map(&:round)
+    mouse_x_on_map = @target.x +
+      (x + $window.mouse_x - ($window.width / 2)) / @zoom
+    mouse_y_on_map = @target.y +
+      (y + $window.mouse_y - ($window.height / 2)) / @zoom
+    [mouse_x_on_map, mouse_y_on_map].map(&:round)
   end
 
   def update
@@ -24,8 +27,8 @@ class Camera
     @x -= @target.speed if @x > @target.x + $window.width / 4
     @y += @target.speed if @y < @target.y - $window.height / 4
     @y -= @target.speed if @y > @target.y + $window.height / 4
-    zoom_delta = @zoom > 0 ? 0.01 : 1.0
 
+    zoom_delta = @zoom > 0 ? 0.01 : 1.0
     if $window.button_down?(Gosu::KbUp)
       @zoom -= zoom_delta unless @zoom < 0.7
     elsif $window.button_down?(Gosu::KbDown)

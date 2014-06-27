@@ -14,4 +14,3 @@ end
 $window = GameWindow.new
 GameState.switch(MenuState.instance)
 $window.show
-

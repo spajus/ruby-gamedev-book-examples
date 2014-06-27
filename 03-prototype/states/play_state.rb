@@ -19,14 +19,15 @@ class PlayState < GameState
     @bullets.map(&:update)
     @bullets.reject!(&:done?)
     @camera.update
-    $window.caption = "Tanks Prototype. [FPS: #{Gosu.fps}. Tank @ #{@tank.x.round}:#{@tank.y.round}]"
+    $window.caption = 'Tanks Prototype. ' <<
+      "[FPS: #{Gosu.fps}. Tank @ #{@tank.x.round}:#{@tank.y.round}]"
   end
 
   def draw
-    off_x = -@camera.x + $window.width / 2
-    off_y = -@camera.y + $window.height / 2
     cam_x = @camera.x
     cam_y = @camera.y
+    off_x =  $window.width / 2 - cam_x
+    off_y =  $window.height / 2 - cam_y
     $window.translate(off_x, off_y) do
       zoom = @camera.zoom
       $window.scale(zoom, zoom, cam_x, cam_y) do
@@ -39,10 +40,14 @@ class PlayState < GameState
   end
 
   def button_down(id)
-    bullet = @tank.shoot(*@camera.mouse_coords) if id == Gosu::MsLeft
-    @bullets << bullet if bullet
+    if id == Gosu::MsLeft
+      bullet = @tank.shoot(*@camera.mouse_coords)
+      @bullets << bullet if bullet
+    end
     $window.close if id == Gosu::KbQ
-    GameState.switch(MenuState.instance) if id == Gosu::KbEscape
+    if id == Gosu::KbEscape
+      GameState.switch(MenuState.instance)
+    end
   end
 
 end

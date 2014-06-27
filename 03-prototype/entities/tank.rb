@@ -82,7 +82,6 @@ class Tank
 
   private
 
-
   def any_button_down?(*buttons)
     buttons.each do |b|
       return true if $window.button_down?(b)

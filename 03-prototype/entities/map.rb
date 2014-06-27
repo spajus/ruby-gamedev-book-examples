@@ -1,5 +1,6 @@
 require 'perlin_noise'
 require 'gosu_texture_packer'
+
 class Map
   MAP_WIDTH = 100
   MAP_HEIGHT = 100
@@ -51,7 +52,8 @@ class Map
 
   def load_tiles
     tiles = Gosu::Image.load_tiles(
-      $window, Game.media_path('ground.png'), 128, 128, true)
+      $window, Game.media_path('ground.png'),
+      128, 128, true)
     @sand = tiles[0]
     @grass = tiles[8]
     @water = Gosu::Image.new(
@@ -84,5 +86,4 @@ class Map
       @grass
     end
   end
-
 end

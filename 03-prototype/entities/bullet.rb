@@ -1,8 +1,8 @@
 class Bullet
   COLOR = Gosu::Color::BLACK
   MAX_DIST = 300
-  MIN_DIST = 100
   START_DIST = 20
+
   def initialize(source_x, source_y, target_x, target_y)
     @x, @y = source_x, source_y
     @target_x, @target_y = target_x, target_y
@@ -10,11 +10,7 @@ class Bullet
     if trajectory_length > MAX_DIST
       @target_x, @target_y = point_at_distance(MAX_DIST)
     end
-    if trajectory_length < MIN_DIST
-      @target_x, @target_y = point_at_distance(MIN_DIST)
-    end
     sound.play
-    @fired_at = Gosu.milliseconds
   end
 
   def draw
@@ -28,11 +24,6 @@ class Bullet
       @explosion ||= Explosion.new(@x, @y)
       @explosion.draw
     end
-  end
-
-  def sound
-    @@sound ||= Gosu::Sample.new(
-      $window, Game.media_path('fire.mp3'))
   end
 
   def update
@@ -54,8 +45,16 @@ class Bullet
   end
 
   def fire(speed)
-    @speed = speed
+    @speed = speed / 30
+    @fired_at = Gosu.milliseconds
     self
+  end
+
+  private
+
+  def sound
+    @@sound ||= Gosu::Sample.new(
+      $window, Game.media_path('fire.mp3'))
   end
 
   def trajectory_length
@@ -71,7 +70,4 @@ class Bullet
     p_y = @y + (@target_y - @y) * distance_factor
     [p_x, p_y]
   end
-
-  private
-
 end
