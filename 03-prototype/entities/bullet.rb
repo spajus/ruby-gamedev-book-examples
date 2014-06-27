@@ -4,10 +4,8 @@ class Bullet
   MIN_DIST = 100
   START_DIST = 20
   def initialize(source_x, source_y, target_x, target_y)
-    @x = source_x
-    @y = source_y
-    @target_x = target_x
-    @target_y = target_y
+    @x, @y = source_x, source_y
+    @target_x, @target_y = target_x, target_y
     @x, @y = point_at_distance(START_DIST)
     if trajectory_length > MAX_DIST
       @target_x, @target_y = point_at_distance(MAX_DIST)
@@ -38,7 +36,8 @@ class Bullet
   end
 
   def update
-    @x, @y = point_at_distance((Gosu.milliseconds - @fired_at) * 0.001 * @speed)
+    fly_distance = (Gosu.milliseconds - @fired_at) * 0.001 * @speed
+    @x, @y = point_at_distance(fly_distance)
     @explosion && @explosion.update
   end
 

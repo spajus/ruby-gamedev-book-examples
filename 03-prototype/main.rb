@@ -1,7 +1,7 @@
 require 'gosu'
-require_relative 'game_state'
-require_relative 'menu_state'
-require_relative 'play_state'
+require_relative 'states/game_state'
+require_relative 'states/menu_state'
+require_relative 'states/play_state'
 require_relative 'game_window'
 
 module Game
@@ -12,7 +12,6 @@ module Game
 end
 
 $window = GameWindow.new
-#MenuState.instance.play_state = $window.state = PlayState.new
 GameState.switch(MenuState.instance)
 $window.show
 

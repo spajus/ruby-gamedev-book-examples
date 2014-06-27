@@ -1,8 +1,8 @@
-require_relative 'map'
-require_relative 'tank'
-require_relative 'camera'
-require_relative 'bullet'
-require_relative 'explosion'
+require_relative '../entities/map'
+require_relative '../entities/tank'
+require_relative '../entities/camera'
+require_relative '../entities/bullet'
+require_relative '../entities/explosion'
 class PlayState < GameState
 
   def initialize
