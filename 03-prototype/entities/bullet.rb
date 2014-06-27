@@ -45,7 +45,7 @@ class Bullet
   end
 
   def fire(speed)
-    @speed = speed / 30
+    @speed = speed
     @fired_at = Gosu.milliseconds
     self
   end
