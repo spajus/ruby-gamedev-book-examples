@@ -1,0 +1,78 @@
+➜  code git:(master) ✗ ruby 04-prototype-optimized/main.rb
+Thread ID: 70133544772720
+Fiber ID: 70133544467220
+Total: 0.649315
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name
+ 32.18      0.209     0.209     0.000     0.000      423   Gosu::Window#caption=
+  4.24      0.028     0.028     0.000     0.000    23066   Gosu::Image#draw
+  2.97      0.086     0.019     0.000     0.066      423   Tank#update
+  2.70      0.381     0.018     0.000     0.363      882   Gosu::Window#show
+  2.30      0.357     0.015     0.000     0.342      423   PlayState#update
+  1.70      0.039     0.011     0.000     0.028      423   Camera#update
+  1.63      0.185     0.011     0.000     0.174     3900  *Range#each
+  1.57      0.010     0.010     0.000     0.000     1641   Float#+
+  1.53      0.010     0.010     0.000     0.000     1269   Gosu::Image#draw_rot
+  1.52      0.010     0.010     0.000     0.000     7801   Gosu::Window#button_down?
+  1.45      0.013     0.009     0.000     0.004     1591   Array#each
+  1.35      0.028     0.009     0.000     0.019     1168   Tank#speed
+  1.21      0.012     0.008     0.000     0.005      423   Camera#viewport
+  1.13      0.011     0.007     0.000     0.004      423   Map#tile_at
+  1.00      0.215     0.006     0.000     0.209      423   Map#draw
+  0.95      0.262     0.006     0.000     0.256      423   PlayState#draw
+  0.92      0.025     0.006     0.000     0.019     1591   Tank#moving?
+  0.90      0.238     0.006     0.000     0.232      423   Gosu::Window#scale
+  0.86      0.012     0.006     0.000     0.006      423   Camera#draw_crosshair
+  0.82      0.019     0.005     0.000     0.013     1591   Tank#any_button_down?
+  0.76      0.005     0.005     0.000     0.000     2538   Gosu::Window#width
+  0.68      0.006     0.004     0.000     0.002     1269   Array#map
+  0.67      0.006     0.004     0.000     0.002      423   Tank#change_angle
+  0.66      0.015     0.004     0.000     0.011      423   Tank#draw
+  0.63      0.006     0.004     0.000     0.002      423   Array#map!
+  0.62      0.004     0.004     0.000     0.000     2538   Gosu::Window#height
+  0.61      0.004     0.004     0.000     0.000      353   Gosu::Song#play
+  0.57      0.241     0.004     0.000     0.238      423   Gosu::Window#translate
+  0.50      0.003     0.003     0.000     0.000     1692   Symbol#to_proc
+  0.49      0.360     0.003     0.000     0.357      423   GameWindow#update
+  0.49      0.003     0.003     0.000     0.000     2436   Float#-
+  0.46      0.003     0.003     0.000     0.000     2502   Float#/
+  0.45      0.003     0.003     0.000     0.000      423   Camera#target_delta_on_screen
+  0.44      0.003     0.003     0.000     0.000     1824   Fixnum#-
+  0.41      0.014     0.003     0.000     0.011      423   Map#can_move_to?
+  0.37      0.002     0.002     0.000     0.000      423   Tank#sound
+  0.36      0.002     0.002     0.000     0.000     1269   Fixnum#to_s
+  0.35      0.269     0.002     0.000     0.266      846  *Gosu::Window#protected_draw_2
+  0.34      0.002     0.002     0.000     0.000      423   <Module::Math>#atan2
+  0.31      0.002     0.002     0.000     0.000     1608   Fixnum#/
+  0.31      0.003     0.002     0.000     0.001      423   GameWindow#needs_redraw?
+  0.30      0.002     0.002     0.000     0.000      846   Gosu::Window#mouse_y
+  0.30      0.002     0.002     0.000     0.000      846   Gosu::Window#draw_line
+  0.29      0.002     0.002     0.000     0.000      846   Gosu::Window#mouse_x
+  0.29      0.002     0.002     0.000     0.000     1608   Float#to_i
+  0.29      0.002     0.002     0.000     0.000     1098   Float#<
+  0.27      0.264     0.002     0.000     0.262      423   GameWindow#draw
+  0.22      0.001     0.001     0.000     0.000      795   Float#%
+  0.21      0.001     0.001     0.000     0.000      423   Array#reject!
+  0.19      0.001     0.001     0.000     0.000      795   Float#round
+  0.18      0.001     0.001     0.000     0.000      795   Float#floor
+  0.18      0.001     0.001     0.000     0.000      423   Float#-@
+  0.17      0.001     0.001     0.000     0.000      423   GameState#needs_redraw?
+  0.15      0.001     0.001     0.000     0.000      477   Float#>
+  0.14      0.001     0.001     0.000     0.000      424   Float#*
+  0.14      0.001     0.001     0.000     0.000      423   <Module::Gosu>#fps
+  0.06      0.000     0.000     0.000     0.000      194   Fixnum#>
+  0.04      0.000     0.000     0.000     0.000       70   Gosu::Song#pause
+  0.04      0.000     0.000     0.000     0.000      174   Fixnum#<
+  0.04      0.000     0.000     0.000     0.000      184   Fixnum#+
+  0.02      0.000     0.000     0.000     0.000       18   PlayState#button_down
+  0.02      0.000     0.000     0.000     0.000       18   Gosu::Window#button_up
+  0.02      0.000     0.000     0.000     0.000       51   Integer#floor
+  0.02      0.000     0.000     0.000     0.000       84   Integer#to_i
+  0.02      0.000     0.000     0.000     0.000       18   GameWindow#button_down
+  0.01      0.000     0.000     0.000     0.000       51   Integer#round
+  0.01      0.000     0.000     0.000     0.000       22   Fixnum#<=
+  0.00      0.000     0.000     0.000     0.000       10   Fixnum#*
+  0.00      0.000     0.000     0.000     0.000        1   PlayState#leave
+
+* indicates recursively called methods
