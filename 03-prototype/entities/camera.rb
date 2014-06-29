@@ -7,6 +7,12 @@ class Camera
     @zoom = 1
   end
 
+  def can_view?(x, y, obj)
+    x0, x1, y0, y1 = viewport
+    (x0 - obj.width..x1).include?(x) &&
+      (y0 - obj.height..y1).include?(y)
+  end
+
   def mouse_coords
     x, y = target_delta_on_screen
     mouse_x_on_map = @target.x +
@@ -56,5 +62,15 @@ class Camera
     $window.draw_line(
       x, y - 10, Gosu::Color::RED,
       x, y + 10, Gosu::Color::RED, 100)
+  end
+
+  private
+
+  def viewport
+    x0 = @x - ($window.width / 2)  / @zoom
+    x1 = @x + ($window.width / 2)  / @zoom
+    y0 = @y - ($window.height / 2) / @zoom
+    y1 = @y + ($window.height / 2) / @zoom
+    [x0, x1, y0, y1]
   end
 end

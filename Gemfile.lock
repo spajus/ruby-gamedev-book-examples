@@ -13,6 +13,7 @@ GEM
     perlin_noise (0.1.2)
     rake (10.3.2)
     rmagick (2.13.2)
+    ruby-prof (0.15.1)
 
 PLATFORMS
   ruby
@@ -23,3 +24,4 @@ DEPENDENCIES
   gosu_tiled
   perlin_noise
   rake
+  ruby-prof

@@ -34,7 +34,9 @@ class Map
         tile = @map[x][y]
         map_x = x * TILE_SIZE
         map_y = y * TILE_SIZE
-        tile.draw(map_x, map_y, 0)
+        if camera.can_view?(map_x, map_y, tile)
+          tile.draw(map_x, map_y, 0)
+        end
       end
     end
   end
