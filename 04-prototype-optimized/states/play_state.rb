@@ -5,6 +5,7 @@ require_relative '../entities/bullet'
 require_relative '../entities/explosion'
 require 'ruby-prof' if ENV['ENABLE_PROFILING']
 class PlayState < GameState
+  attr_accessor :update_interval
 
   def initialize
     @map = Map.new

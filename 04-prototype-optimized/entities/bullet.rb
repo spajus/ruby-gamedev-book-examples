@@ -27,7 +27,8 @@ class Bullet
   end
 
   def update
-    fly_distance = (Gosu.milliseconds - @fired_at) * 0.001 * @speed
+    fly_speed = Game.adjust_speed(@speed)
+    fly_distance = (Gosu.milliseconds - @fired_at) * 0.001 * fly_speed
     @x, @y = point_at_distance(fly_distance)
     @explosion && @explosion.update
   end
