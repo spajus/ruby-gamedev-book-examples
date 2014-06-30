@@ -39,7 +39,7 @@ class Map
           tile = @map[x][y]
           map_x = x * TILE_SIZE
           map_y = y * TILE_SIZE
-          tile.draw(map_x, map_y, 0)
+          tile.draw(map_x, map_y, 0) if tile
         end
       end
     end
