@@ -16,9 +16,6 @@ class Tank
     sound.volume = 0.3
   end
 
-  def unit_file
-  end
-
   def sound
     @@sound ||= Gosu::Song.new(
       $window, Game.media_path('tank_driving.mp3'))
