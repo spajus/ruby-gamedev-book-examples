@@ -1,5 +1,4 @@
 class BulletSounds
-
   def self.play
     sound.play
   end

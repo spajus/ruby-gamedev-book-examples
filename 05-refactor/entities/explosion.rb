@@ -1,17 +1,10 @@
 class Explosion < GameObject
   attr_accessor :x, :y
 
-  def initialize(x, y)
+  def initialize(object_pool, x, y)
+    super(object_pool)
     @x, @y = x, y
-    @graphics = ExplosionGraphics.new(self)
+    ExplosionGraphics.new(self)
     ExplosionSounds.play
-  end
-
-  def update
-    @graphics.update
-  end
-
-  def draw(viewport)
-    @graphics.draw
   end
 end

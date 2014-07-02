@@ -17,7 +17,7 @@ class Camera
   end
 
   def update
-    shift = Game.adjust_speed(@target.speed)
+    shift = Game.adjust_speed(@target.physics.speed)
     @x += shift if @x < @target.x - $window.width / 4
     @x -= shift if @x > @target.x + $window.width / 4
     @y += shift if @y < @target.y - $window.height / 4
@@ -30,7 +30,7 @@ class Camera
     elsif $window.button_down?(Gosu::KbDown)
       @zoom += zoom_delta unless @zoom > 10
     else
-      target_zoom = @target.speed > 1.1 ? 0.85 : 1.0
+      target_zoom = @target.physics.speed > 1.1 ? 0.85 : 1.0
       if @zoom <= (target_zoom - 0.01)
         @zoom += zoom_delta / 3
       elsif @zoom > (target_zoom + 0.01)

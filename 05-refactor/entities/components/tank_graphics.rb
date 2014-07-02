@@ -1,6 +1,4 @@
 class TankGraphics < Component
-  attr_accessor :object
-
   def initialize(game_object)
     super(game_object)
     @body = units.frame('tank1_body.png')
@@ -9,9 +7,9 @@ class TankGraphics < Component
   end
 
   def draw(viewport)
-    @shadow.draw_rot(object.x - 1, object.y - 1, 0, object.direction)
-    @body.draw_rot(object.x, object.y, 1, object.direction)
-    @gun.draw_rot(object.x, object.y, 2, object.gun_angle)
+    @shadow.draw_rot(x - 1, y - 1, 0, object.direction)
+    @body.draw_rot(x, y, 1, object.direction)
+    @gun.draw_rot(x, y, 2, object.gun_angle)
   end
 
   private

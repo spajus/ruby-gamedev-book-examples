@@ -5,7 +5,8 @@ class PlayState < GameState
   def initialize
     @map = Map.new
     @camera = Camera.new
-    @tank = Tank.new(@map, PlayerInput.new(@camera))
+    @object_pool = ObjectPool.new(@map)
+    @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
     @camera.target = @tank
   end
 
@@ -22,8 +23,8 @@ class PlayState < GameState
   end
 
   def update
-    @map.objects.map(&:update)
-    @map.objects.reject!(&:removable?)
+    @object_pool.objects.map(&:update)
+    @object_pool.objects.reject!(&:removable?)
     @camera.update
     update_caption
   end
@@ -38,7 +39,7 @@ class PlayState < GameState
       zoom = @camera.zoom
       $window.scale(zoom, zoom, cam_x, cam_y) do
         @map.draw(viewport)
-        @map.objects.map { |o| o.draw(viewport) }
+        @object_pool.objects.map { |o| o.draw(viewport) }
       end
     end
     @camera.draw_crosshair

@@ -1,9 +1,11 @@
 class TankPhysics < Component
   attr_accessor :speed
 
-  def initialize(game_object, map)
+  def initialize(game_object, object_pool)
     super(game_object)
-    @map = map
+    @object_pool = object_pool
+    @map = object_pool.map
+    game_object.x, game_object.y = @map.find_spawn_point
     @speed = 0.0
   end
 
@@ -12,7 +14,7 @@ class TankPhysics < Component
   end
 
   def moving?
-    object.speed > 0
+    @speed > 0
   end
 
   def update
@@ -22,7 +24,7 @@ class TankPhysics < Component
       decelerate
     end
     if @speed > 0
-      new_x, new_y = object.x, object.y
+      new_x, new_y = x, y
       shift = Game.adjust_speed(@speed)
       case @object.direction.to_i
       when 0

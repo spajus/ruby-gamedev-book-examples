@@ -4,8 +4,8 @@ class PlayerInput < Component
     @camera = camera
   end
 
-  def control(object)
-    set_object(object)
+  def control(obj)
+    self.object = obj
   end
 
   def update

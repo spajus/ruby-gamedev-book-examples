@@ -1,5 +1,4 @@
 class TankSounds < Component
-
   def update
     if object.physics.moving?
       if @driving && @driving.paused?
@@ -29,5 +28,4 @@ class TankSounds < Component
     @@crash_sound ||= Gosu::Sample.new(
       $window, Game.media_path('crash.ogg'))
   end
-
 end

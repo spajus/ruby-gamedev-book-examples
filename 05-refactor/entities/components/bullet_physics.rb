@@ -18,22 +18,24 @@ class BulletPhysics < Component
   end
 
   def trajectory_length
-    d_x = object.target_x - object.x
-    d_y = object.target_y - object.y
+    d_x = object.target_x - x
+    d_y = object.target_y - y
     Math.sqrt(d_x * d_x + d_y * d_y)
   end
 
   def point_at_distance(distance)
-    return [object.target_x, object.target_y] if distance > trajectory_length
+    if distance > trajectory_length
+      return [object.target_x, object.target_y]
+    end
     distance_factor = distance.to_f / trajectory_length
-    p_x = object.x + (object.target_x - object.x) * distance_factor
-    p_y = object.y + (object.target_y - object.y) * distance_factor
+    p_x = x + (object.target_x - x) * distance_factor
+    p_y = y + (object.target_y - y) * distance_factor
     [p_x, p_y]
   end
 
   private
 
   def arrived?
-    object.x == object.target_x && object.y == object.target_y
+    x == object.target_x && y == object.target_y
   end
 end

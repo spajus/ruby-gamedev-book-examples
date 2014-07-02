@@ -1,5 +1,4 @@
 class ExplosionGraphics < Component
-
   FRAME_DELAY = 16.66 # ms
 
   def initialize(object)
@@ -7,11 +6,11 @@ class ExplosionGraphics < Component
     @current_frame = 0
   end
 
-  def draw
+  def draw(viewport)
     image = current_frame
     image.draw(
-      object.x - image.width / 2 + 3,
-      object.y - image.height / 2 - 35,
+      x - image.width / 2 + 3,
+      y - image.height / 2 - 35,
       20)
   end
 
