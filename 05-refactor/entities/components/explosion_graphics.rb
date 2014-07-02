@@ -1,7 +1,7 @@
 class ExplosionGraphics < Component
   FRAME_DELAY = 16.66 # ms
 
-  def initialize(object)
+  def initialize(game_object)
     super
     @current_frame = 0
   end
@@ -37,6 +37,7 @@ class ExplosionGraphics < Component
   def animation
     @@animation ||=
     Gosu::Image.load_tiles(
-      $window, Game.media_path('explosion.png'), 128, 128, false)
+      $window, Utils.media_path('explosion.png'),
+      128, 128, false)
   end
 end

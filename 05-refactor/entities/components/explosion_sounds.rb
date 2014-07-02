@@ -1,11 +1,15 @@
 class ExplosionSounds
-  def self.play
-    sound.play
-  end
+  class << self
+    def play
+      sound.play
+    end
 
-  def self.sound
-    @@sound ||= Gosu::Sample.new(
-      $window, Game.media_path('explosion.mp3'))
+    private
+
+    def sound
+      @@sound ||= Gosu::Sample.new(
+        $window, Utils.media_path('explosion.mp3'))
+    end
   end
 end
 

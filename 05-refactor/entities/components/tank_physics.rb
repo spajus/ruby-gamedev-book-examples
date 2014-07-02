@@ -25,7 +25,7 @@ class TankPhysics < Component
     end
     if @speed > 0
       new_x, new_y = x, y
-      shift = Game.adjust_speed(@speed)
+      shift = Utils.adjust_speed(@speed)
       case @object.direction.to_i
       when 0
         new_y -= shift

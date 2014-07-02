@@ -5,8 +5,8 @@ class Bullet < GameObject
     super(object_pool)
     @x, @y = source_x, source_y
     @target_x, @target_y = target_x, target_y
-    @physics = BulletPhysics.new(self)
-    @graphics = BulletGraphics.new(self)
+    BulletPhysics.new(self)
+    BulletGraphics.new(self)
     BulletSounds.play
   end
 

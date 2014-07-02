@@ -57,12 +57,12 @@ class Map
 
   def load_tiles
     tiles = Gosu::Image.load_tiles(
-      $window, Game.media_path('ground.png'),
+      $window, Utils.media_path('ground.png'),
       128, 128, true)
     @sand = tiles[0]
     @grass = tiles[8]
     @water = Gosu::Image.new(
-      $window, Game.media_path('water.png'), true)
+      $window, Utils.media_path('water.png'), true)
   end
 
   def generate_map
