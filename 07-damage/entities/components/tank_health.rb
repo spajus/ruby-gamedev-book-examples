@@ -1,6 +1,6 @@
 class TankHealth < Component
-  COOLDOWN_TIME = 50
-  attr_accessor :health, :health_updated, :last_damage
+  attr_accessor :health
+
   def initialize(object, object_pool)
     super(object)
     @object_pool = object_pool
@@ -35,14 +35,10 @@ class TankHealth < Component
 
   def inflict_damage(amount)
     if @health > 0
-      now = Gosu.milliseconds
-      if now - @last_damage > COOLDOWN_TIME
-        @last_damage = now
-        @health_updated = true
-        @health = [@health - amount.to_i, 0].max
-        if @health < 1
-          Explosion.new(@object_pool, x, y)
-        end
+      @health_updated = true
+      @health = [@health - amount.to_i, 0].max
+      if @health < 1
+        Explosion.new(@object_pool, x, y)
       end
     end
   end
