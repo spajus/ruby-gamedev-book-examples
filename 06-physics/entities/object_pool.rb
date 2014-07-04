@@ -6,12 +6,10 @@ class ObjectPool
   end
 
   def nearby(object, max_distance)
-    result = []
-    @objects.each do |obj|
-      next if obj == object
-      result << obj if Utils.distance_between(
-        obj.x, obj.y, object.x, object.y) < max_distance
+    @objects.select do |obj|
+      distance = Utils.distance_between(
+        obj.x, obj.y, object.x, object.y)
+      obj != object && distance < max_distance
     end
-    result
   end
 end
