@@ -5,12 +5,10 @@ class Map
   MAP_WIDTH = 100
   MAP_HEIGHT = 100
   TILE_SIZE = 128
-  attr_accessor :objects
 
   def initialize
     load_tiles
     @map = generate_map
-    @objects = []
   end
 
   def find_spawn_point

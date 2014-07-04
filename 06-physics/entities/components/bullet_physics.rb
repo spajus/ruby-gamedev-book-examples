@@ -18,9 +18,7 @@ class BulletPhysics < Component
   end
 
   def trajectory_length
-    d_x = object.target_x - x
-    d_y = object.target_y - y
-    Math.sqrt(d_x * d_x + d_y * d_y)
+    Utils.distance_between(object.target_x, object.target_y, x, y)
   end
 
   def point_at_distance(distance)

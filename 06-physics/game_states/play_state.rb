@@ -8,6 +8,9 @@ class PlayState < GameState
     @object_pool = ObjectPool.new(@map)
     @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
     @camera.target = @tank
+    5.times do |i|
+      Tank.new(@object_pool, AiInput.new)
+    end
   end
 
   def enter
@@ -52,6 +55,14 @@ class PlayState < GameState
     end
     if id == Gosu::KbEscape
       GameState.switch(MenuState.instance)
+    end
+    if id == Gosu::KbT
+      t = Tank.new(@object_pool, AiInput.new)
+      t.x = @tank.x + rand(-300..300)
+      t.y = @tank.y + rand(-300..300)
+    end
+    if id == Gosu::KbF1
+      $debug = !$debug
     end
   end
 

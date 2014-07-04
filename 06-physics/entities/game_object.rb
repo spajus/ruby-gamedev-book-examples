@@ -25,6 +25,12 @@ class GameObject
     @removable = true
   end
 
+  def box
+  end
+
+  def collide
+  end
+
   protected
 
   def object_pool
