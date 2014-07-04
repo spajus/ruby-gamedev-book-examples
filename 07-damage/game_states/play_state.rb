@@ -1,4 +1,3 @@
-require 'ruby-prof' if ENV['ENABLE_PROFILING']
 class PlayState < GameState
   attr_accessor :update_interval
 
@@ -10,18 +9,6 @@ class PlayState < GameState
     @camera.target = @tank
     5.times do |i|
       Tank.new(@object_pool, AiInput.new)
-    end
-  end
-
-  def enter
-    RubyProf.start if ENV['ENABLE_PROFILING']
-  end
-
-  def leave
-    if ENV['ENABLE_PROFILING']
-      result = RubyProf.stop
-      printer = RubyProf::FlatPrinter.new(result)
-      printer.print(STDOUT)
     end
   end
 
@@ -64,9 +51,26 @@ class PlayState < GameState
     if id == Gosu::KbF1
       $debug = !$debug
     end
+    if id == Gosu::KbF2
+      toggle_profiling
+    end
   end
 
   private
+
+  def toggle_profiling
+    require 'ruby-prof' unless defined?(RubyProf)
+    if @profiling_now
+      result = RubyProf.stop
+      printer = RubyProf::FlatPrinter.new(result)
+      printer.print(STDOUT)
+      @profiling_now = false
+    else
+      RubyProf.start
+      @profiling_now = true
+    end
+  end
+
 
   def update_caption
     now = Gosu.milliseconds

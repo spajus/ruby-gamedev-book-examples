@@ -16,6 +16,7 @@ class TankPhysics < Component
     object.y = y
     return false unless @map.can_move_to?(x, y)
     @object_pool.nearby(object, 100).each do |obj|
+      next if obj.class == Bullet && obj.source == object
       if collides_with_poly?(obj.box)
         @collides_with = obj
         # Allow to get unstuck
@@ -91,7 +92,7 @@ class TankPhysics < Component
   end
 
   def update
-    if object.throttle_down
+    if object.throttle_down && !object.health.dead?
       accelerate
     else
       decelerate

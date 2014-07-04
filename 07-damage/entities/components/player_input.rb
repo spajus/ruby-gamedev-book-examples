@@ -9,6 +9,7 @@ class PlayerInput < Component
   end
 
   def update
+    return if object.health.dead?
     d_x, d_y = @camera.target_delta_on_screen
     atan = Math.atan2(($window.width / 2) - d_x - $window.mouse_x,
                       ($window.height / 2) - d_y - $window.mouse_y)
