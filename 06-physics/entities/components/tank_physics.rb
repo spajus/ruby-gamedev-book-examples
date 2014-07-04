@@ -1,5 +1,5 @@
 class TankPhysics < Component
-  attr_accessor :speed
+  attr_accessor :speed, :in_collision
 
   def initialize(game_object, object_pool)
     super(game_object)
@@ -40,7 +40,7 @@ class TankPhysics < Component
     elsif change > 0
       @speed *= 0.66
     end
-    object.direction = new_direction
+    object.direction = new_direction % 360
   end
 
   def moving?
@@ -119,9 +119,11 @@ class TankPhysics < Component
       end
       if can_move_to?(new_x, new_y)
         object.x, object.y = new_x, new_y
+        @in_collision = false
       else
         object.sounds.collide if @speed > 1
         @speed = 0.0
+        @in_collision = true
       end
     end
   end
