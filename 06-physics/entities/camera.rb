@@ -17,11 +17,12 @@ class Camera
   end
 
   def update
-    shift = Utils.adjust_speed(@target.physics.speed)
-    @x += shift if @x < @target.x - $window.width / 4
-    @x -= shift if @x > @target.x + $window.width / 4
-    @y += shift if @y < @target.y - $window.height / 4
-    @y -= shift if @y > @target.y + $window.height / 4
+    shift_x = @target.physics.inertia_x
+    shift_y = @target.physics.inertia_y
+    @x += shift_x if @x < @target.x - $window.width / 4
+    @x -= shift_x if @x > @target.x + $window.width / 4
+    @y += shift_y if @y < @target.y - $window.height / 4
+    @y -= shift_y if @y > @target.y + $window.height / 4
 
     zoom_delta = @zoom > 0 ? 0.01 : 1.0
     zoom_delta = Utils.adjust_speed(zoom_delta)

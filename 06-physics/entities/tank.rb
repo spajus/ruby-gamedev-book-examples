@@ -20,7 +20,7 @@ class Tank < GameObject
   def shoot(target_x, target_y)
     if Gosu.milliseconds - (@last_shot || 0) > SHOOT_DELAY
       @last_shot = Gosu.milliseconds
-      Bullet.new(object_pool, @x, @y, target_x, target_y).fire(100)
+      Bullet.new(object_pool, @x, @y, target_x, target_y).fire(self, 100)
     end
   end
 

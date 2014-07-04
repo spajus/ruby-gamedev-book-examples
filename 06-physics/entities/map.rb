@@ -28,6 +28,16 @@ class Map
     tile && tile != @water
   end
 
+  def movement_penalty(x, y)
+    tile = tile_at(x, y)
+    case tile
+    when @sand
+      0.33
+    else
+      0
+    end
+  end
+
   def draw(viewport)
     viewport.map! { |p| p / TILE_SIZE }
     x0, x1, y0, y1 = viewport.map(&:to_i)

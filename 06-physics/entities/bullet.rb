@@ -1,13 +1,17 @@
 class Bullet < GameObject
-  attr_accessor :x, :y, :target_x, :target_y, :speed, :fired_at
+  attr_accessor :x, :y, :target_x, :target_y, :source, :speed, :fired_at
 
   def initialize(object_pool, source_x, source_y, target_x, target_y)
     super(object_pool)
     @x, @y = source_x, source_y
     @target_x, @target_y = target_x, target_y
-    BulletPhysics.new(self)
+    BulletPhysics.new(self, object_pool)
     BulletGraphics.new(self)
     BulletSounds.play
+  end
+
+  def box
+    [x, y]
   end
 
   def explode
@@ -15,7 +19,8 @@ class Bullet < GameObject
     mark_for_removal
   end
 
-  def fire(speed)
+  def fire(source, speed)
+    @source = source
     @speed = speed
     @fired_at = Gosu.milliseconds
   end
