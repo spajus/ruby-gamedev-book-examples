@@ -86,22 +86,6 @@ class TankPhysics < Component
                 )
   end
 
-  def collides_with_poly?(poly)
-    if poly
-      poly.each_slice(2) do |x, y|
-        return true if Utils.point_in_poly(x, y, *box)
-      end
-      box.each_slice(2) do |x, y|
-        return true if Utils.point_in_poly(x, y, *poly)
-      end
-    end
-    false
-  end
-
-  def collides_with_point?(x, y)
-    Utils.point_in_poly(x, y, box)
-  end
-
   def update
     if object.throttle_down
       accelerate
@@ -160,4 +144,21 @@ class TankPhysics < Component
   def damp_speed
     @speed = 0 if @speed < 0.01
   end
+
+  def collides_with_poly?(poly)
+    if poly
+      poly.each_slice(2) do |x, y|
+        return true if Utils.point_in_poly(x, y, *box)
+      end
+      box.each_slice(2) do |x, y|
+        return true if Utils.point_in_poly(x, y, *poly)
+      end
+    end
+    false
+  end
+
+  def collides_with_point?(x, y)
+    Utils.point_in_poly(x, y, box)
+  end
+
 end
