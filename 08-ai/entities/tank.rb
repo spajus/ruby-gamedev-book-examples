@@ -26,4 +26,8 @@ class Tank < GameObject
     end
   end
 
+  def to_s
+    "Tank [#{@health.health}@#{@x}:#{@y}@#{@physics.speed.round(2)}px/tick]"
+  end
+
 end

@@ -8,7 +8,7 @@ class PlayState < GameState
     @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
     @camera.target = @tank
     5.times do |i|
-      Tank.new(@object_pool, AiInput.new)
+      Tank.new(@object_pool, AiInput.new(@object_pool))
     end
   end
 
@@ -44,9 +44,9 @@ class PlayState < GameState
       GameState.switch(MenuState.instance)
     end
     if id == Gosu::KbT
-      t = Tank.new(@object_pool, AiInput.new)
-      t.x = @tank.x + rand(-300..300)
-      t.y = @tank.y + rand(-300..300)
+      t = Tank.new(@object_pool,
+                   AiInput.new(@object_pool))
+      t.x, t.y = @camera.mouse_coords
     end
     if id == Gosu::KbF1
       $debug = !$debug

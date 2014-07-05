@@ -1,46 +1,65 @@
 class AiInput < Component
+
+  UPDATE_RATE = 200 # ms
+  def initialize(object_pool)
+    @object_pool = object_pool
+    super(nil)
+    @last_update = Gosu.milliseconds
+    @retarget_speed = rand(1..5)
+    @target = nil
+  end
+
   def control(obj)
     self.object = obj
-    @enabled = rand > 0.2
+    @vision = AiVision.new(obj, @object_pool, rand(300..700))
+    @desired_gun_angle = rand(0..360)
   end
 
   def update
-    return false unless @enabled
-    return if object.health.dead?
-    if object.physics.in_collision &&
-      object.physics.collides_with.class != Bullet
-      change = case rand
-               when 0..0.33
-                 135
-               when 0.33..0.66
-                 315
-               else
-                 180
-               end
-      object.physics.change_direction(
-        object.direction + change)
-    end
+    adjust_gun_angle
     now = Gosu.milliseconds
-    @direction_changed_at ||= now
-    @next_direction_change ||= rand(500..3000)
-    if now - @direction_changed_at > @next_direction_change
-      change = case rand
-               when 0..0.1
-                 180
-               when 0.1..0.3
-                 90
-               when 0.3..0.5
-                 -90
-               when 0.5..0.75
-                 45
-               when 0.75..1
-                 -45
-               end
-      object.physics.change_direction(
-        object.direction + change)
-      @direction_changed_at = now
-      @next_direction_change = rand(2000..5000)
-      object.throttle_down = rand > 0.15
+    if @target
+      @desired_gun_angle = Utils.angle_between(x, y, @target.x, @target.y)
+    else
+      @desired_gun_angle = object.direction
+    end
+    return if now - @last_update < UPDATE_RATE
+    @last_update = now
+    @vision.update
+    if @vision.in_sight.any?
+      if @vision.closest_tank != @target
+        change_target(@vision.closest_tank)
+      end
     end
   end
+
+  def change_target(new_target)
+    puts "Changing target from #{@target} to #{new_target}"
+    @target = new_target
+  end
+
+  def adjust_gun_angle
+    actual = object.gun_angle
+    desired = @desired_gun_angle
+    if actual > desired
+      if actual - desired > 180 # 0 -> 360 fix
+        object.gun_angle = (actual + @retarget_speed) % 360
+        if object.gun_angle < desired
+          object.gun_angle = desired # damp
+        end
+      else
+        object.gun_angle = [actual - @retarget_speed, desired].max
+      end
+    elsif actual < desired
+      if desired - actual > 180 # 360 -> 0 fix
+        object.gun_angle = (360 + actual - @retarget_speed) % 360
+        if object.gun_angle > desired
+          object.gun_angle = desired # damp
+        end
+      else
+        object.gun_angle = [actual + @retarget_speed, desired].min
+      end
+    end
+  end
+
 end
