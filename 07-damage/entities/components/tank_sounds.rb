@@ -4,7 +4,7 @@ class TankSounds < Component
       if @driving && @driving.paused?
         @driving.resume
       elsif @driving.nil?
-        @driving = driving_sound.play(0.3, 1, true)
+        @driving = driving_sound.play(0.1, 1, true)
       end
     else
       if @driving && @driving.playing?

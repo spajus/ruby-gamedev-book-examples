@@ -8,9 +8,9 @@ class Tank < GameObject
     @input = input
     @input.control(self)
     @physics = TankPhysics.new(self, object_pool)
-    @graphics = TankGraphics.new(self)
     @sounds = TankSounds.new(self)
     @health = TankHealth.new(self, object_pool)
+    @graphics = TankGraphics.new(self)
     @direction = rand(0..7) * 45
     @gun_angle = rand(0..360)
   end

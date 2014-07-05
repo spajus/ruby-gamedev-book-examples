@@ -14,10 +14,11 @@ class TankGraphics < Component
     @body_dead = units.frame('tank1_body_destroyed.png')
     @shadow_dead = units.frame('tank1_body_destroyed_shadow.png')
     @gun_dead = nil
+    update
   end
 
   def update
-    if object.health.dead?
+    if object && object.health.dead?
       @body = @body_dead
       @gun = @gun_dead
       @shadow = @shadow_dead
