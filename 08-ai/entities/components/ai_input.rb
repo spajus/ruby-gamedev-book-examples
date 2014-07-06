@@ -11,7 +11,7 @@ class AiInput < Component
     self.object = obj
     @vision = AiVision.new(obj, @object_pool, rand(300..700))
     @gun = AiGun.new(obj, @vision)
-    @motion = TankMotionFSM.new(obj, @vision)
+    @motion = TankMotionFSM.new(obj, @vision, @gun)
   end
 
   def on_collision(with)

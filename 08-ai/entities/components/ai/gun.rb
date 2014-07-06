@@ -1,6 +1,6 @@
 class AiGun
-
   DECISION_DELAY = 700
+  attr_reader :target, :desired_gun_angle
 
   def initialize(object, vision)
     @object = object
@@ -28,7 +28,7 @@ class AiGun
     if @target
       if (0..5 - rand(0..@accuracy)).include?(
         (@desired_gun_angle - @object.gun_angle).abs.round)
-        distance = Utils.distance_between(@object.x, @object.y, @target.x, @target.y)
+        distance = distance_to_target
         target_x, target_y = Utils.point_at_distance(
           @object.x, @object.y, @object.gun_angle,
           distance + 5 - rand(0..@accuracy))
@@ -38,6 +38,12 @@ class AiGun
       end
     end
   end
+
+  def distance_to_target
+    Utils.distance_between(
+      @object.x, @object.y, @target.x, @target.y)
+  end
+
 
   def should_shoot?
     rand * @aggressiveness > 0.5
