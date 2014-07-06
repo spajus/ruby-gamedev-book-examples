@@ -6,7 +6,7 @@ class TankMotionFSM
     @gun = gun
     @roaming_state = TankRoamingState.new(object, vision)
     @fighting_state = TankFightingState.new(object, vision)
-    @fleeing_state = TankRoamingState.new(object, vision)
+    @fleeing_state = TankFleeingState.new(object, vision, gun)
     @chasing_state = TankChasingState.new(object, vision, gun)
     set_state(@roaming_state)
   end
