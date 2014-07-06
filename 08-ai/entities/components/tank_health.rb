@@ -44,7 +44,7 @@ class TankHealth < Component
   end
 
   def draw(viewport)
-    @image.draw(
+    @image && @image.draw(
       x - @image.width / 2,
       y - object.graphics.height / 2 -
       @image.height, 100)

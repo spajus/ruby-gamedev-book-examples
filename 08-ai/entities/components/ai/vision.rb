@@ -1,4 +1,5 @@
 class AiVision
+  CACHE_TIMEOUT = 200
   attr_reader :in_sight
   def initialize(viewer, object_pool, distance)
     @viewer = viewer
@@ -11,7 +12,17 @@ class AiVision
   end
 
   def closest_tank
-    @in_sight.sort do |a, b|
+    now = Gosu.milliseconds
+    @closest_tank = nil
+    if now - (@cache_updated_at ||= 0) > CACHE_TIMEOUT
+      @closest_tank = nil
+      @cache_updated_at = now
+    end
+    @closest_tank ||= find_closest_tank
+  end
+
+  def find_closest_tank
+    @in_sight.select { |o| o.class == Tank && !o.health.dead? }.sort do |a, b|
       d1 = Utils.distance_between(@viewer.x, @viewer.y, a.x, a.y)
       d2 = Utils.distance_between(@viewer.x, @viewer.y, b.x, b.y)
       d1 <=> d2

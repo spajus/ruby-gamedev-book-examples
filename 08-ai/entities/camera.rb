@@ -51,14 +51,15 @@ class Camera
   end
 
   def draw_crosshair
+    color = Gosu::Color::RED
     x = $window.mouse_x
     y = $window.mouse_y
     $window.draw_line(
-      x - 10, y, Gosu::Color::RED,
-      x + 10, y, Gosu::Color::RED, 100)
+      x - 10, y, color,
+      x + 10, y, color, 100)
     $window.draw_line(
-      x, y - 10, Gosu::Color::RED,
-      x, y + 10, Gosu::Color::RED, 100)
+      x, y - 10, color,
+      x, y + 10, color, 100)
   end
 
   def viewport

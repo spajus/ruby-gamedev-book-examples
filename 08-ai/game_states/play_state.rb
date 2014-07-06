@@ -17,6 +17,14 @@ class PlayState < GameState
     @object_pool.objects.reject!(&:removable?)
     @camera.update
     update_caption
+    if @tank.health.dead?
+      if Gosu.milliseconds - (@died_at ||= Gosu.milliseconds) > 5000
+        @tank.mark_for_removal
+        @died_at = nil
+        @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
+        @camera.target = @tank
+      end
+    end
   end
 
   def draw

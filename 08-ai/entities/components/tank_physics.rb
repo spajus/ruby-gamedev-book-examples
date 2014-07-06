@@ -128,6 +128,7 @@ class TankPhysics < Component
         @inertia_x = @inertia_y = shift
         @in_collision = false
       else
+        object.input.on_collision(@collides_with)
         object.sounds.collide if @speed > 1 && @collides_with.class == Tank
         @speed = 0.0
         @in_collision = true
