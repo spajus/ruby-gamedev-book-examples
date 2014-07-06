@@ -4,6 +4,9 @@ class TankMotionState
     @vision = vision
   end
 
+  def enter
+  end
+
   def update
     change_direction if should_change_direction?
     if substate_expired?

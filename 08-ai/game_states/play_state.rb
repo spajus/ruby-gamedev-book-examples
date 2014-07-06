@@ -17,13 +17,11 @@ class PlayState < GameState
     @object_pool.objects.reject!(&:removable?)
     @camera.update
     update_caption
-    if @tank.health.dead?
-      if Gosu.milliseconds - (@died_at ||= Gosu.milliseconds) > 5000
-        @tank.mark_for_removal
-        @died_at = nil
-        @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
-        @camera.target = @tank
-      end
+    if @camera.target.health.dead?
+      close_tank = @object_pool.nearby(@camera.target, 500).select do |o|
+        o.class == Tank && !o.health.dead?
+      end.first
+      @camera.target = close_tank if close_tank
     end
   end
 
@@ -61,6 +59,11 @@ class PlayState < GameState
     end
     if id == Gosu::KbF2
       toggle_profiling
+    end
+    if id == Gosu::KbR
+      @tank.mark_for_removal
+      @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
+      @camera.target = @tank
     end
   end
 

@@ -1,9 +1,19 @@
 class TankFleeingState < TankMotionState
+  MAX_FLEE_TIME = 15 * 1000 # 15 seconds
   def initialize(object, vision, gun)
     super(object, vision)
     @object = object
     @vision = vision
     @gun = gun
+  end
+
+  def can_flee?
+    return true unless @started_fleeing
+    Gosu.milliseconds - @started_fleeing > MAX_FLEE_TIME
+  end
+
+  def enter
+    @started_fleeing ||= Gosu.milliseconds
   end
 
   def update

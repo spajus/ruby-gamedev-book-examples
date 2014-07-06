@@ -25,6 +25,7 @@ class TankMotionFSM
     return if state == @current_state
     @last_state_change = Gosu.milliseconds
     @current_state = state
+    state.enter
   end
 
   def choose_state
@@ -39,7 +40,11 @@ class TankMotionFSM
                       @fighting_state
                     end
       else
-        new_state = @fleeing_state
+        if @fleeing_state.can_flee?
+          new_state = @fleeing_state
+        else
+          new_state = @fighting_state
+        end
       end
     else
       new_state = @roaming_state
