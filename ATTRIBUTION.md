@@ -6,6 +6,7 @@
 - http://opengameart.org/content/country-field
 - http://opengameart.org/content/trees-and-bushes
 - http://opengameart.org/content/tanks-and-trucks
+- http://opengameart.org/content/high-resolution-crosshairs
 
 ## Audio
 

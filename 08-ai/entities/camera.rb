@@ -2,6 +2,10 @@ class Camera
   attr_accessor :x, :y, :zoom
   attr_reader :target
 
+  def crosshair
+    @crosshair ||= Gosu::Image.new($window, Utils.media_path('c_dot.png'), false)
+  end
+
   def target=(target)
     @target = target
     @x, @y = target.x, target.y
@@ -52,15 +56,13 @@ class Camera
   end
 
   def draw_crosshair
-    color = Gosu::Color::RED
+    factor = 0.5
     x = $window.mouse_x
     y = $window.mouse_y
-    $window.draw_line(
-      x - 10, y, color,
-      x + 10, y, color, 100)
-    $window.draw_line(
-      x, y - 10, color,
-      x, y + 10, color, 100)
+    c = crosshair
+    c.draw(x - c.width * factor / 2,
+           y - c.height * factor / 2,
+           1000, factor, factor)
   end
 
   def viewport
