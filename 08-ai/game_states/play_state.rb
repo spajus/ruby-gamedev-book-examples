@@ -70,6 +70,7 @@ class PlayState < GameState
       @tank.mark_for_removal
       @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
       @camera.target = @tank
+      @radar.target = @tank
     end
   end
 
