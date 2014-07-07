@@ -42,6 +42,6 @@ class TankRoamingState < TankMotionState
   end
 
   def turn_time
-    rand(400..2000)
+    rand(2000..5000)
   end
 end

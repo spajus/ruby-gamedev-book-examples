@@ -18,6 +18,10 @@ class AiInput < Component
     @motion.on_collision(with)
   end
 
+  def on_damage(amount)
+    @motion.on_damage(amount)
+  end
+
   def update
     return if object.health.dead?
     @gun.adjust_angle

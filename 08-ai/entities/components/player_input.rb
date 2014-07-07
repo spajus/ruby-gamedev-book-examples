@@ -11,6 +11,9 @@ class PlayerInput < Component
   def on_collision(with)
   end
 
+  def on_damage(amount)
+  end
+
   def update
     return if object.health.dead?
     d_x, d_y = @camera.target_delta_on_screen

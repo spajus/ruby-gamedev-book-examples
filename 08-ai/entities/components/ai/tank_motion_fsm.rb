@@ -15,6 +15,12 @@ class TankMotionFSM
     @current_state.on_collision(with)
   end
 
+  def on_damage(amount)
+    if @current_state == @roaming_state
+      set_state(@fighting_state)
+    end
+  end
+
   def update
     choose_state
     @current_state.update
