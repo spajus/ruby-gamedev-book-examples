@@ -2,8 +2,8 @@ require 'perlin_noise'
 require 'gosu_texture_packer'
 
 class Map
-  MAP_WIDTH = 100
-  MAP_HEIGHT = 100
+  MAP_WIDTH = 30
+  MAP_HEIGHT = 30
   TILE_SIZE = 128
 
   def initialize

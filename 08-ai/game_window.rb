@@ -2,7 +2,9 @@ class GameWindow < Gosu::Window
   attr_accessor :state
 
   def initialize
-    super(800, 600, false)
+    super((ENV['w'] || 800).to_i,
+          (ENV['h'] || 600).to_i,
+          false)
   end
 
   def update

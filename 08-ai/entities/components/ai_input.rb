@@ -9,7 +9,8 @@ class AiInput < Component
 
   def control(obj)
     self.object = obj
-    @vision = AiVision.new(obj, @object_pool, rand(300..700))
+    @vision = AiVision.new(obj, @object_pool,
+                           rand(700..1200))
     @gun = AiGun.new(obj, @vision)
     @motion = TankMotionFSM.new(obj, @vision, @gun)
   end

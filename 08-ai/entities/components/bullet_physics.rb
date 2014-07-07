@@ -1,6 +1,6 @@
 class BulletPhysics < Component
   START_DIST = 20
-  MAX_DIST = 300
+  MAX_DIST = 500
 
   def initialize(game_object, object_pool)
     super(game_object)
