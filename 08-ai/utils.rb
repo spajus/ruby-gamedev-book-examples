@@ -15,7 +15,7 @@ module Utils
   end
 
   def self.adjust_speed(speed)
-    speed * update_interval / 33.33
+    speed * update_interval / 33.33 / 2
   end
 
   def self.button_down?(button)
