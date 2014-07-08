@@ -1,5 +1,6 @@
 class TankMotionFSM
   STATE_CHANGE_DELAY = 500
+
   def initialize(object, vision, gun)
     @object = object
     @vision = vision
@@ -37,14 +38,13 @@ class TankMotionFSM
   def choose_state
     return unless Gosu.milliseconds -
       (@last_state_change) > STATE_CHANGE_DELAY
-
     if @gun.target
       if @object.health.health > 40
-        new_state = if @gun.distance_to_target > BulletPhysics::MAX_DIST
-                      @chasing_state
-                    else
-                      @fighting_state
-                    end
+        if @gun.distance_to_target > BulletPhysics::MAX_DIST
+          new_state = @chasing_state
+        else
+          new_state = @fighting_state
+        end
       else
         if @fleeing_state.can_flee?
           new_state = @fleeing_state

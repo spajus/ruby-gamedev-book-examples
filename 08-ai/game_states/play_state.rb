@@ -8,7 +8,7 @@ class PlayState < GameState
     @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
     @camera.target = @tank
     @radar = Radar.new(@object_pool, @tank)
-    5.times do |i|
+    10.times do |i|
       Tank.new(@object_pool, AiInput.new(@object_pool))
     end
   end

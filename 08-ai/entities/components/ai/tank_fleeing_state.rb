@@ -22,7 +22,9 @@ class TankFleeingState < TankMotionState
   end
 
   def change_direction
-    @object.physics.change_direction(180 + @gun.desired_gun_angle - @gun.desired_gun_angle % 45)
+    @object.physics.change_direction(
+      180 + @gun.desired_gun_angle -
+      @gun.desired_gun_angle % 45)
 
     @changed_direction_at = Gosu.milliseconds
     @will_keep_direction_for = turn_time

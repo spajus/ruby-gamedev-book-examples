@@ -1,6 +1,6 @@
 class AiInput < Component
-
   UPDATE_RATE = 200 # ms
+
   def initialize(object_pool)
     @object_pool = object_pool
     super(nil)

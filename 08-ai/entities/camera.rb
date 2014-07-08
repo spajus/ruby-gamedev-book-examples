@@ -2,10 +2,6 @@ class Camera
   attr_accessor :x, :y, :zoom
   attr_reader :target
 
-  def crosshair
-    @crosshair ||= Gosu::Image.new($window, Utils.media_path('c_dot.png'), false)
-  end
-
   def target=(target)
     @target = target
     @x, @y = target.x, target.y
@@ -71,5 +67,12 @@ class Camera
     y0 = @y - ($window.height / 2) / @zoom
     y1 = @y + ($window.height / 2) / @zoom
     [x0, x1, y0, y1]
+  end
+
+  private
+
+  def crosshair
+    @crosshair ||= Gosu::Image.new(
+      $window, Utils.media_path('c_dot.png'), false)
   end
 end

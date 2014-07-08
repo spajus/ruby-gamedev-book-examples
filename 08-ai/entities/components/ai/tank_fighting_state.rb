@@ -8,7 +8,7 @@ class TankFightingState < TankMotionState
   def update
     change_direction if should_change_direction?
     if substate_expired?
-      rand > 0.3 ? drive : wait
+      rand > 0.2 ? drive : wait
     end
   end
 
@@ -38,10 +38,10 @@ class TankFightingState < TankMotionState
   end
 
   def drive_time
-    rand(100..3000)
+    rand(2000..5000)
   end
 
   def turn_time
-    rand(300..1200)
+    rand(500..2500)
   end
 end
