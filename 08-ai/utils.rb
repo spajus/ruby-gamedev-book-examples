@@ -39,8 +39,10 @@ module Utils
     result = []
     angle = angle * Math::PI / 180.0
     points.each_slice(2) do |x, y|
-      r_x = Math.cos(angle) * (around_x - x) - Math.sin(angle) * (around_y - y) + around_x
-      r_y = Math.sin(angle) * (around_x - x) + Math.cos(angle) * (around_y - y) + around_y
+      r_x = Math.cos(angle) * (around_x - x) -
+        Math.sin(angle) * (around_y - y) + around_x
+      r_y = Math.sin(angle) * (around_x - x) +
+        Math.cos(angle) * (around_y - y) + around_y
       result << r_x
       result << r_y
     end
