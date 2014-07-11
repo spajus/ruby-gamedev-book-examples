@@ -7,7 +7,6 @@ class PlayState < GameState
     @object_pool = ObjectPool.new(@map)
     @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
     @camera.target = @tank
-    @radar = Radar.new(@object_pool, @tank)
     10.times do |i|
       Tank.new(@object_pool, AiInput.new(@object_pool))
     end
@@ -17,7 +16,6 @@ class PlayState < GameState
     @object_pool.objects.map(&:update)
     @object_pool.objects.reject!(&:removable?)
     @camera.update
-    @radar.update
     update_caption
     if @camera.target.health.dead?
       close_tank = @object_pool.nearby(@camera.target, 500).select do |o|
@@ -25,7 +23,6 @@ class PlayState < GameState
       end.first
       if close_tank
         @camera.target = close_tank
-        @radar.target = close_tank
       end
     end
   end
@@ -44,7 +41,6 @@ class PlayState < GameState
       end
     end
     @camera.draw_crosshair
-    @radar.draw
   end
 
   def button_down(id)
@@ -70,7 +66,6 @@ class PlayState < GameState
       @tank.mark_for_removal
       @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
       @camera.target = @tank
-      @radar.target = @tank
     end
   end
 
