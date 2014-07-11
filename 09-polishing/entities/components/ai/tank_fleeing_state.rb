@@ -9,7 +9,7 @@ class TankFleeingState < TankMotionState
 
   def can_flee?
     return true unless @started_fleeing
-    Gosu.milliseconds - @started_fleeing > MAX_FLEE_TIME
+    Gosu.milliseconds - @started_fleeing < MAX_FLEE_TIME
   end
 
   def enter
