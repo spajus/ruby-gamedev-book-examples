@@ -7,6 +7,7 @@
 - http://opengameart.org/content/trees-and-bushes
 - http://opengameart.org/content/tanks-and-trucks
 - http://opengameart.org/content/high-resolution-crosshairs
+- http://opengameart.org/content/boxes-and-barrels
 
 ## Audio
 

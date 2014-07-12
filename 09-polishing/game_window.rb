@@ -4,7 +4,7 @@ class GameWindow < Gosu::Window
   def initialize
     super((ENV['w'] || 800).to_i,
           (ENV['h'] || 600).to_i,
-          false)
+          (ENV['fs'] ? true : false))
   end
 
   def update

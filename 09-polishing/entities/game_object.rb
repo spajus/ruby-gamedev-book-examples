@@ -25,6 +25,9 @@ class GameObject
     @removable = true
   end
 
+  def on_collision(object)
+  end
+
   def box
   end
 

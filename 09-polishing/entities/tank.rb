@@ -19,6 +19,14 @@ class Tank < GameObject
     @physics.box
   end
 
+  def on_collision(object)
+    return unless object
+    object.input.on_collision(object) if object.respond_to?(:input)
+    # Avoid recursion
+    object.on_collision(self) if object.class != Tank
+    @sounds.collide if @physics.speed > 1 && object.class != Bullet
+  end
+
   def shoot(target_x, target_y)
     if can_shoot?
       @last_shot = Gosu.milliseconds

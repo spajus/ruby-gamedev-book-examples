@@ -9,6 +9,11 @@ class Box < GameObject
     @angle = rand(-15..15)
   end
 
+  def on_collision(object)
+    @x, @y = Utils.point_at_distance(@x, @y, object.direction, 2)
+    @box = nil
+  end
+
   def box
     return @box if @box
     w = @graphics.width / 2

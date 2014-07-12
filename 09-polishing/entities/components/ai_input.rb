@@ -16,6 +16,7 @@ class AiInput < Component
   end
 
   def on_collision(with)
+    return if object.health.dead?
     @motion.on_collision(with)
   end
 
