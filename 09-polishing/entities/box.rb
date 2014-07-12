@@ -5,7 +5,7 @@ class Box < GameObject
     super(object_pool)
     @x, @y = x, y
     @graphics = BoxGraphics.new(self)
-    @health = BoxHealth.new(self, object_pool)
+    @health = Health.new(self, object_pool, 10, true)
     @angle = rand(-15..15)
   end
 

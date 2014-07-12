@@ -5,7 +5,7 @@ class Tree < GameObject
     super(object_pool)
     @x, @y = x, y
     @graphics = TreeGraphics.new(self, seed)
-    @health = TreeHealth.new(self, object_pool)
+    @health = Health.new(self, object_pool, 30, false)
   end
 
   def box
