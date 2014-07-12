@@ -36,5 +36,6 @@ class AiInput < Component
 
   def draw(viewport)
     @motion.draw(viewport)
+    @gun.draw(viewport)
   end
 end

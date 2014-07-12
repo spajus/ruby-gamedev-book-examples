@@ -13,7 +13,7 @@ class Explosion < GameObject
 
   def inflict_damage
     object_pool.nearby(self, 100).each do |obj|
-      if obj.class == Tank
+      if obj.respond_to?(:health)
         obj.health.inflict_damage(
           Math.sqrt(3 * 100 - Utils.distance_between(
               obj.x, obj.y, x, y)))
