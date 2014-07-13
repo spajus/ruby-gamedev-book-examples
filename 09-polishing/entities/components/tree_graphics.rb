@@ -1,27 +1,33 @@
 require 'gosu_texture_packer'
 class TreeGraphics < Component
-  SHAKE_TIME = 50
+  SHAKE_TIME = 100
+  SHAKE_DISTANCE = [2, 1, 0, -1, -2, -1, 0, 1, 0, -1, 0]
   def initialize(object, seed)
     super(object)
     load_sprite(seed)
   end
 
   def shake(direction)
-    @shake_start = Gosu.milliseconds
+    now = Gosu.milliseconds
+    return if @shake_start &&
+      now - @shake_start < SHAKE_TIME + 200
+    @shake_start = now
     @shake_direction = direction
     @shake_amplitude = 0
     @shaking = true
   end
 
   def adjust_shake(x, y, shaking_for)
-    distance = -2 + (shaking_for / 20) % 4
+    elapsed = [shaking_for, SHAKE_TIME].min / SHAKE_TIME.to_f
+    frame = ((SHAKE_DISTANCE.length - 1) * elapsed).floor
+    distance = SHAKE_DISTANCE[frame]
     Utils.point_at_distance(x, y, @shake_direction, distance)
   end
 
   def draw(viewport)
-    #x1, x2, y1, y2 = viewport
-    #if (x1 - width..x2 + width).include?(center_x)
-    #  if (y1 - height..y2 + height).include?(center_y)
+    x1, x2, y1, y2 = viewport
+    if (x1 - width..x2 + width).include?(center_x)
+      if (y1 - height..y2 + height).include?(center_y)
     if @shaking
       shaking_for = Gosu.milliseconds - @shake_start
       sx, sy = adjust_shake(center_x, center_y, shaking_for)
@@ -32,8 +38,8 @@ class TreeGraphics < Component
     else
       @tree.draw(center_x, center_y, 5)
     end
-    #  end
-    #end
+      end
+    end
     if $debug
       color = Gosu::Color::RED
       $window.draw_triangle(

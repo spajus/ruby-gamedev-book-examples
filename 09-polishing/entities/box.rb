@@ -10,6 +10,7 @@ class Box < GameObject
   end
 
   def on_collision(object)
+    return unless object.physics.speed > 1.0
     @x, @y = Utils.point_at_distance(@x, @y, object.direction, 2)
     @box = nil
   end
