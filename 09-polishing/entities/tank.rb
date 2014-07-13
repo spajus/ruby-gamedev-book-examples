@@ -21,10 +21,18 @@ class Tank < GameObject
 
   def on_collision(object)
     return unless object
-    object.input.on_collision(object) if object.respond_to?(:input)
     # Avoid recursion
-    object.on_collision(self) if object.class != Tank
-    @sounds.collide if @physics.speed > 1 && object.class != Bullet
+    if object.class == Tank
+      # Inform AI about hit
+      object.input.on_collision(object)
+    else
+      # Call only on non-tanks to avoid recursion
+      object.on_collision(self)
+    end
+    # Bullets should not slow Tanks down
+    if object.class != Bullet
+      @sounds.collide if @physics.speed > 1
+    end
   end
 
   def shoot(target_x, target_y)
