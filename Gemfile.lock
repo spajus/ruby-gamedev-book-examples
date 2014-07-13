@@ -19,7 +19,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gosu
+  gosu (~> 0.7.50)
   gosu_texture_packer
   gosu_tiled
   perlin_noise
