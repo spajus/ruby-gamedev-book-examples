@@ -177,5 +177,4 @@ class TankPhysics < Component
   def collides_with_point?(x, y)
     Utils.point_in_poly(x, y, box)
   end
-
 end

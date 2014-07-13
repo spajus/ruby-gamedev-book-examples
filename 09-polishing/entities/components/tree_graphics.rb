@@ -1,5 +1,6 @@
 class TreeGraphics < Component
   SHAKE_TIME = 100
+  SHAKE_COOLDOWN = 200
   SHAKE_DISTANCE = [2, 1, 0, -1, -2, -1, 0, 1, 0, -1, 0]
   def initialize(object, seed)
     super(object)
@@ -9,10 +10,9 @@ class TreeGraphics < Component
   def shake(direction)
     now = Gosu.milliseconds
     return if @shake_start &&
-      now - @shake_start < SHAKE_TIME + 200
+      now - @shake_start < SHAKE_TIME + SHAKE_COOLDOWN
     @shake_start = now
     @shake_direction = direction
-    @shake_amplitude = 0
     @shaking = true
   end
 
@@ -26,9 +26,10 @@ class TreeGraphics < Component
   def draw(viewport)
     if @shaking
       shaking_for = Gosu.milliseconds - @shake_start
-      sx, sy = adjust_shake(center_x, center_y, shaking_for)
-      @tree.draw(sx, sy, 5)
-      if shaking_for > SHAKE_TIME
+      shaking_x, shaking_y = adjust_shake(
+        center_x, center_y, shaking_for)
+      @tree.draw(shaking_x, shaking_y, 5)
+      if shaking_for >= SHAKE_TIME
         @shaking = false
       end
     else
