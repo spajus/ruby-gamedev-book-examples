@@ -1,5 +1,3 @@
-require 'perlin_noise'
-
 class Map
   MAP_WIDTH = 30
   MAP_HEIGHT = 30

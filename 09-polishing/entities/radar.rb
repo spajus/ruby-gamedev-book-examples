@@ -3,6 +3,8 @@ class Radar
   WIDTH = 150
   HEIGHT = 100
   PADDING = 10
+  # Black with 33% transparency
+  BACKGROUND = Gosu::Color.new(255 * 0.33, 0, 0, 0)
   attr_accessor :target
 
   def initialize(object_pool, target)
@@ -21,17 +23,16 @@ class Radar
   end
 
   def draw
-    color = Gosu::Color::BLACK
     x1, x2, y1, y2 = radar_coords
     $window.draw_quad(
-      x1, y1, color,
-      x2, y1, color,
-      x2, y2, color,
-      x1, y2, color,
+      x1, y1, BACKGROUND,
+      x2, y1, BACKGROUND,
+      x2, y2, BACKGROUND,
+      x1, y2, BACKGROUND,
       200)
-    draw_tank(@target, Gosu::Color::WHITE)
+    draw_tank(@target, Gosu::Color::GREEN)
     @nearby && @nearby.each do |t|
-      draw_tank(t, Gosu::Color::GREEN)
+      draw_tank(t, Gosu::Color::RED)
     end
   end
 

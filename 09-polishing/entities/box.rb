@@ -19,6 +19,7 @@ class Box < GameObject
     return @box if @box
     w = @graphics.width / 2
     h = @graphics.height / 2
+    # Bounding box adjusted to trim shadows
     @box = [x - w + 4,     y - h + 8,
             x + w , y - h + 8,
             x + w , y + h,

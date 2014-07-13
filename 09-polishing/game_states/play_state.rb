@@ -8,7 +8,7 @@ class PlayState < GameState
     @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
     @camera.target = @tank
     @radar = Radar.new(@object_pool, @tank)
-    12.times do |i|
+    10.times do |i|
       Tank.new(@object_pool, AiInput.new(@object_pool))
     end
     puts "Object Pool: #{@object_pool.objects.size}"
@@ -89,7 +89,6 @@ class PlayState < GameState
       @profiling_now = true
     end
   end
-
 
   def update_caption
     now = Gosu.milliseconds
