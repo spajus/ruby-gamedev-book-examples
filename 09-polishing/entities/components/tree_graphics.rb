@@ -1,4 +1,3 @@
-require 'gosu_texture_packer'
 class TreeGraphics < Component
   SHAKE_TIME = 100
   SHAKE_DISTANCE = [2, 1, 0, -1, -2, -1, 0, 1, 0, -1, 0]
@@ -25,9 +24,6 @@ class TreeGraphics < Component
   end
 
   def draw(viewport)
-    x1, x2, y1, y2 = viewport
-    if (x1 - width..x2 + width).include?(center_x)
-      if (y1 - height..y2 + height).include?(center_y)
     if @shaking
       shaking_for = Gosu.milliseconds - @shake_start
       sx, sy = adjust_shake(center_x, center_y, shaking_for)
@@ -38,16 +34,7 @@ class TreeGraphics < Component
     else
       @tree.draw(center_x, center_y, 5)
     end
-      end
-    end
-    if $debug
-      color = Gosu::Color::RED
-      $window.draw_triangle(
-        x - 5, y, color,
-        x, y + 5, color,
-        x, y, color,
-        1000)
-    end
+    Utils.mark_corners(object.box) if $debug
   end
 
   def height

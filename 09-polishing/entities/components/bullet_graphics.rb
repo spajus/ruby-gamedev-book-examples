@@ -1,9 +1,7 @@
 class BulletGraphics < Component
-  COLOR1 = Gosu::Color::WHITE
-  COLOR2 = Gosu::Color::BLACK
-
   def draw(viewport)
     image.draw(x - 8, y - 8, 1)
+    Utils.mark_corners(object.box) if $debug
   end
 
   private

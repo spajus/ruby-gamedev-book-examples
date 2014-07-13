@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'gosu'
+require 'gosu_texture_packer'
 
 root_dir = File.dirname(__FILE__)
 require_pattern = File.join(root_dir, '**/*.rb')
