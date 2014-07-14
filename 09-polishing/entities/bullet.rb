@@ -7,7 +7,7 @@ class Bullet < GameObject
     @target_x, @target_y = target_x, target_y
     BulletPhysics.new(self, object_pool)
     BulletGraphics.new(self)
-    BulletSounds.play
+    BulletSounds.play(self, object_pool.camera)
   end
 
   def box

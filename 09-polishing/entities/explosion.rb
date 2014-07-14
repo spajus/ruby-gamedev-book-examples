@@ -5,7 +5,7 @@ class Explosion < GameObject
     super(object_pool)
     @x, @y = x, y
     ExplosionGraphics.new(self)
-    ExplosionSounds.play
+    ExplosionSounds.play(self, object_pool.camera)
     inflict_damage
   end
 

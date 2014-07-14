@@ -1,5 +1,5 @@
 class ObjectPool
-  attr_accessor :objects, :map
+  attr_accessor :objects, :map, :camera
 
   def initialize
     @objects = []
