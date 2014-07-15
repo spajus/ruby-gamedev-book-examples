@@ -1,11 +1,16 @@
 class PlayerInput < Component
-  def initialize(camera)
+  NAME_COLOR = Gosu::Color.argb(0xee084408)
+  attr_reader :name
+
+  def initialize(name, camera)
     super(nil)
+    @name = name
     @camera = camera
   end
 
   def control(obj)
     self.object = obj
+    obj.components << self
   end
 
   def on_collision(with)
@@ -33,6 +38,19 @@ class PlayerInput < Component
     if Utils.button_down?(Gosu::MsLeft)
       object.shoot(*@camera.mouse_coords)
     end
+  end
+
+  def draw(viewport)
+    @name_image ||= Gosu::Image.from_text(
+      $window, @name, Gosu.default_font_name, 20)
+    @name_image.draw(
+      x - @name_image.width / 2 - 1,
+      y + object.graphics.height / 2, 100,
+      1, 1, Gosu::Color::WHITE)
+    @name_image.draw(
+      x - @name_image.width / 2,
+      y + object.graphics.height / 2, 100,
+      1, 1, NAME_COLOR)
   end
 
   private
@@ -65,4 +83,5 @@ class PlayerInput < Component
     angle = (angle + 360) % 360 if angle && angle < 0
     (angle || previous_angle)
   end
+
 end

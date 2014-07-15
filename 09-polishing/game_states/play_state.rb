@@ -2,15 +2,20 @@ class PlayState < GameState
   attr_accessor :update_interval
 
   def initialize
+    # http://www.paulandstorm.com/wha/clown-names/
+    @names = Names.new(
+      Utils.media_path('names.txt'))
     @object_pool = ObjectPool.new
     @map = Map.new(@object_pool)
     @camera = Camera.new
-    @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
+    @tank = Tank.new(@object_pool,
+                     PlayerInput.new('Player', @camera))
     @camera.target = @tank
     @object_pool.camera = @camera
     @radar = Radar.new(@object_pool, @tank)
     10.times do |i|
-      Tank.new(@object_pool, AiInput.new(@object_pool))
+      Tank.new(@object_pool, AiInput.new(
+        @names.random, @object_pool))
     end
     puts "Object Pool: #{@object_pool.objects.size}"
   end
@@ -60,7 +65,7 @@ class PlayState < GameState
     end
     if id == Gosu::KbT
       t = Tank.new(@object_pool,
-                   AiInput.new(@object_pool))
+        AiInput.new(@names.random, @object_pool))
       t.x, t.y = @camera.mouse_coords
     end
     if id == Gosu::KbF1
@@ -71,7 +76,8 @@ class PlayState < GameState
     end
     if id == Gosu::KbR
       @tank.mark_for_removal
-      @tank = Tank.new(@object_pool, PlayerInput.new(@camera))
+      @tank = Tank.new(@object_pool,
+        PlayerInput.new('Player', @camera))
       @camera.target = @tank
       @radar.target = @tank
     end
