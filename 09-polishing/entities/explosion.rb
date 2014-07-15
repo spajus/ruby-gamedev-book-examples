@@ -3,10 +3,20 @@ class Explosion < GameObject
 
   def initialize(object_pool, x, y)
     super(object_pool)
+    @object_pool = object_pool
     @x, @y = x, y
+    Damage.new(@object_pool, @x, @y)
     ExplosionGraphics.new(self)
     ExplosionSounds.play(self, object_pool.camera)
     inflict_damage
+  end
+
+  def effect?
+    true
+  end
+
+  def mark_for_removal
+    super
   end
 
   private

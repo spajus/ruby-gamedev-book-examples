@@ -7,8 +7,7 @@ class BulletGraphics < Component
   private
 
   def image
-    @@bullet = Gosu::Image.new(
+    @@bullet ||= Gosu::Image.new(
       $window, Utils.media_path('bullet.png'), false)
   end
-
 end

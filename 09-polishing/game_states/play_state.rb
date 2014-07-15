@@ -23,6 +23,7 @@ class PlayState < GameState
 
   def update
     StereoSample.cleanup
+    @object_pool.new_cycle
     @object_pool.objects.map(&:update)
     @object_pool.objects.reject!(&:removable?)
     @camera.update

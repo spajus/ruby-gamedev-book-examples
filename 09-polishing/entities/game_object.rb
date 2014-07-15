@@ -28,6 +28,10 @@ class GameObject
   def on_collision(object)
   end
 
+  def effect?
+    false
+  end
+
   def box
   end
 

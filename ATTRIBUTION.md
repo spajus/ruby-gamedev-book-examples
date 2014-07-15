@@ -8,6 +8,7 @@
 - http://opengameart.org/content/tanks-and-trucks
 - http://opengameart.org/content/high-resolution-crosshairs
 - http://opengameart.org/content/boxes-and-barrels
+- http://opengameart.org/content/details-for-damaged-and-dirty-textures
 
 ## Audio
 
@@ -18,3 +19,4 @@
 - http://opengameart.org/content/crash-collision
 - http://opengameart.org/content/metal-interactions
 - http://opengameart.org/content/sci-fi-shwop-1
+
