@@ -1,4 +1,5 @@
 module Utils
+  HEARING_DISTANCE = 1000.0
   DEBUG_COLORS = [
     Gosu::Color::RED,
     Gosu::Color::BLUE,
@@ -114,14 +115,15 @@ module Utils
     distance = Utils.distance_between(
       camera.target.x, camera.target.y,
       object.x, object.y)
-    [(1000 - distance), 0].max / 1000.0
+    distance = [(HEARING_DISTANCE - distance), 0].max
+    distance / HEARING_DISTANCE
   end
 
   def self.pan(object, camera)
     return 0 if object == camera.target
     pan = object.x - camera.target.x
     sig = pan > 0 ? 1 : -1
-    pan = (pan % 1000) / 1000.0
+    pan = (pan % HEARING_DISTANCE) / HEARING_DISTANCE
     if sig > 0
       pan
     else
