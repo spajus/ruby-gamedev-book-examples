@@ -6,7 +6,6 @@ class TankPhysics < Component
     super(game_object)
     @object_pool = object_pool
     @map = object_pool.map
-    game_object.x, game_object.y = @map.find_spawn_point
     @speed = 0.0
   end
 

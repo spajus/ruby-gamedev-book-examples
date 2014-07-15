@@ -1,12 +1,13 @@
 class AiInput < Component
-  UPDATE_RATE = 200 # ms
+  # Dark red
   NAME_COLOR = Gosu::Color.argb(0xeeb10000)
+  UPDATE_RATE = 200 # ms
   attr_reader :name
 
   def initialize(name, object_pool)
+    super(nil)
     @object_pool = object_pool
     @name = name
-    super(nil)
     @last_update = Gosu.milliseconds
   end
 
@@ -29,7 +30,7 @@ class AiInput < Component
   end
 
   def update
-    return if object.health.dead?
+    return respawn if object.health.dead?
     @gun.adjust_angle
     now = Gosu.milliseconds
     return if now - @last_update < UPDATE_RATE
@@ -52,5 +53,15 @@ class AiInput < Component
       x - @name_image.width / 2,
       y + object.graphics.height / 2, 100,
       1, 1, NAME_COLOR)
+  end
+
+  private
+
+  def respawn
+    if object.health.should_respawn?
+      object.health.restore
+      object.x, object.y = @object_pool.map.spawn_point
+      PlayerSounds.respawn(object, @object_pool.camera)
+    end
   end
 end

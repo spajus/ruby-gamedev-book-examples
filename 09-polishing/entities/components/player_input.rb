@@ -1,11 +1,12 @@
 class PlayerInput < Component
+  # Dark green
   NAME_COLOR = Gosu::Color.argb(0xee084408)
-  attr_reader :name
 
-  def initialize(name, camera)
+  def initialize(name, camera, object_pool)
     super(nil)
     @name = name
     @camera = camera
+    @object_pool = object_pool
   end
 
   def control(obj)
@@ -20,7 +21,7 @@ class PlayerInput < Component
   end
 
   def update
-    return if object.health.dead?
+    return respawn if object.health.dead?
     d_x, d_y = @camera.target_delta_on_screen
     atan = Math.atan2(($window.width / 2) - d_x - $window.mouse_x,
                       ($window.height / 2) - d_y - $window.mouse_y)
@@ -54,6 +55,15 @@ class PlayerInput < Component
   end
 
   private
+
+  def respawn
+    if object.health.should_respawn?
+      object.health.restore
+      object.x, object.y = @object_pool.map.spawn_point
+      @camera.x, @camera.y = x, y
+      PlayerSounds.respawn(object, @camera)
+    end
+  end
 
   def any_button_down?(*buttons)
     buttons.each do |b|

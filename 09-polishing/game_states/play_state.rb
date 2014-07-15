@@ -7,9 +7,10 @@ class PlayState < GameState
       Utils.media_path('names.txt'))
     @object_pool = ObjectPool.new
     @map = Map.new(@object_pool)
+    @map.spawn_points(15)
     @camera = Camera.new
     @tank = Tank.new(@object_pool,
-                     PlayerInput.new('Player', @camera))
+      PlayerInput.new('Player', @camera, @object_pool))
     @camera.target = @tank
     @object_pool.camera = @camera
     @radar = Radar.new(@object_pool, @tank)
@@ -27,15 +28,6 @@ class PlayState < GameState
     @camera.update
     @radar.update
     update_caption
-    if @camera.target.health.dead?
-      close_tank = @object_pool.nearby(@camera.target, 1500).select do |o|
-        o.class == Tank && !o.health.dead?
-      end.first
-      if close_tank
-        @camera.target = close_tank
-        @radar.target = close_tank
-      end
-    end
   end
 
   def draw
@@ -77,7 +69,7 @@ class PlayState < GameState
     if id == Gosu::KbR
       @tank.mark_for_removal
       @tank = Tank.new(@object_pool,
-        PlayerInput.new('Player', @camera))
+        PlayerInput.new('Player', @camera, @object_pool))
       @camera.target = @tank
       @radar.target = @tank
     end

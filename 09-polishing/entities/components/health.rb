@@ -5,7 +5,12 @@ class Health < Component
     super(object)
     @explodes = explodes
     @object_pool = object_pool
-    @health = health
+    @initial_health = @health = health
+    @health_updated = true
+  end
+
+  def restore
+    @health = @initial_health
     @health_updated = true
   end
 
