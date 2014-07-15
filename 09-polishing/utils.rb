@@ -110,13 +110,16 @@ module Utils
   end
 
   def self.volume(object, camera)
+    return 1 if object == camera.target
     distance = Utils.distance_between(
-      camera.x, camera.y, object.x, object.y)
+      camera.target.x, camera.target.y,
+      object.x, object.y)
     [(1000 - distance), 0].max / 1000.0
   end
 
   def self.pan(object, camera)
-    pan = object.x - camera.x
+    return 0 if object == camera.target
+    pan = object.x - camera.target.x
     sig = pan > 0 ? 1 : -1
     pan = (pan % 1000) / 1000.0
     if sig > 0

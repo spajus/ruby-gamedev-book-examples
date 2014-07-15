@@ -41,9 +41,12 @@ class StereoSample
     @instances["#{id}_l"].nil?
   end
 
-  def play(id = :default, pan = 0, volume = 1, speed = 1, looping = false)
-    @instances["#{id}_l"] = @sound_l.play_pan(-0.2, 0, speed, looping)
-    @instances["#{id}_r"] = @sound_r.play_pan(0.2, 0, speed, looping)
+  def play(id = :default, pan = 0,
+           volume = 1, speed = 1, looping = false)
+    @instances["#{id}_l"] = @sound_l.play_pan(
+      -0.2, 0, speed, looping)
+    @instances["#{id}_r"] = @sound_r.play_pan(
+      0.2, 0, speed, looping)
     volume_and_pan(id, volume, pan)
   end
 
