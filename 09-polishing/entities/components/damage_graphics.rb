@@ -1,12 +1,20 @@
 class DamageGraphics < Component
+  def initialize(object_pool)
+    super
+    @image = images.sample
+    @angle = rand(0..360)
+  end
+
   def draw(viewport)
-    image.draw(x - 32, y - 32, 1)
+    @image.draw_rot(x, y, 0, @angle)
   end
 
   private
 
-  def image
-    @@image ||= Gosu::Image.new(
-      $window, Utils.media_path('damage1.png'), false)
+  def images
+    @@images ||= (1..4).map do |i|
+      Gosu::Image.new($window,
+        Utils.media_path("damage#{i}.png"), false)
+    end
   end
 end

@@ -5,7 +5,9 @@ class Explosion < GameObject
     super(object_pool)
     @object_pool = object_pool
     @x, @y = x, y
-    Damage.new(@object_pool, @x, @y)
+    if @object_pool.map.can_move_to?(x, y)
+      Damage.new(@object_pool, @x, @y)
+    end
     ExplosionGraphics.new(self)
     ExplosionSounds.play(self, object_pool.camera)
     inflict_damage
