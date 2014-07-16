@@ -1,6 +1,5 @@
 class TankPhysics < Component
-  attr_accessor :speed, :in_collision,
-    :inertia_x, :inertia_y, :collides_with
+  attr_accessor :speed, :in_collision, :collides_with
 
   def initialize(game_object, object_pool)
     super(game_object)
@@ -124,7 +123,6 @@ class TankPhysics < Component
       end
       if can_move_to?(new_x, new_y)
         object.x, object.y = new_x, new_y
-        @inertia_x = @inertia_y = shift
         @in_collision = false
       else
         object.on_collision(@collides_with)

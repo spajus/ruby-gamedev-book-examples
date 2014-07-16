@@ -16,10 +16,6 @@ class ObjectPool
   end
 
   def non_effects
-    @non_effects ||= @objects.reject(&:effect?)
-  end
-
-  def new_cycle
-    @non_effets = nil
+    @objects.reject(&:effect?)
   end
 end
