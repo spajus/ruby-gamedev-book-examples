@@ -9,7 +9,6 @@ class Camera
   end
 
   def desired_spot
-
     if @target.physics.moving?
       Utils.point_at_distance(
         @target.x, @target.y,
@@ -31,7 +30,8 @@ class Camera
 
   def update
     des_x, des_y = desired_spot
-    shift = Utils.adjust_speed(@target.physics.speed).floor + 1
+    shift = Utils.adjust_speed(
+      @target.physics.speed).floor + 1
     if @x < des_x
       if des_x - @x < shift
         @x = des_x
