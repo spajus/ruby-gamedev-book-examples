@@ -1,9 +1,8 @@
 class Box < GameObject
-  attr_reader :x, :y, :health, :graphics, :angle
+  attr_reader :health, :graphics, :angle
 
   def initialize(object_pool, x, y)
-    super(object_pool)
-    @x, @y = x, y
+    super
     @graphics = BoxGraphics.new(self)
     @health = Health.new(self, object_pool, 10, true)
     @angle = rand(-15..15)
@@ -11,7 +10,7 @@ class Box < GameObject
 
   def on_collision(object)
     return unless object.physics.speed > 1.0
-    @x, @y = Utils.point_at_distance(@x, @y, object.direction, 2)
+    move(*Utils.point_at_distance(@x, @y, object.direction, 2))
     @box = nil
   end
 

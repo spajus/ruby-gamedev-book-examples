@@ -1,10 +1,11 @@
 class Tank < GameObject
   SHOOT_DELAY = 500
-  attr_accessor :x, :y, :throttle_down, :direction,
+  attr_accessor :throttle_down, :direction,
     :gun_angle, :sounds, :physics, :graphics, :health, :input
 
   def initialize(object_pool, input)
-    super(object_pool)
+    x, y = object_pool.map.spawn_point
+    super(object_pool, x, y)
     @input = input
     @input.control(self)
     @physics = TankPhysics.new(self, object_pool)
@@ -13,7 +14,6 @@ class Tank < GameObject
     @graphics = TankGraphics.new(self)
     @direction = rand(0..7) * 45
     @gun_angle = rand(0..360)
-    @x, @y = object_pool.map.spawn_point
   end
 
   def box

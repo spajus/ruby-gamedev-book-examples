@@ -4,8 +4,9 @@ class BulletPhysics < Component
 
   def initialize(game_object, object_pool)
     super(game_object)
+    x, y = point_at_distance(START_DIST)
+    object.move(x, y)
     @object_pool = object_pool
-    object.x, object.y = point_at_distance(START_DIST)
     if trajectory_length > MAX_DIST
       object.target_x, object.target_y = point_at_distance(MAX_DIST)
     end
@@ -15,7 +16,7 @@ class BulletPhysics < Component
     fly_speed = Utils.adjust_speed(object.speed)
     fly_distance = (Gosu.milliseconds - object.fired_at) *
       0.001 * fly_speed / 2
-    object.x, object.y = point_at_distance(fly_distance)
+    object.move(*point_at_distance(fly_distance))
     check_hit
     object.explode if arrived?
   end

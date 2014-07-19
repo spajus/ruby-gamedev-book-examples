@@ -1,12 +1,26 @@
 class GameObject
-  def initialize(object_pool)
+  attr_reader :x, :y
+  def initialize(object_pool, x, y)
+    @x, @y = x, y
     @components = []
     @object_pool = object_pool
-    @object_pool.objects << self
+    @object_pool.add(self)
   end
 
   def components
     @components
+  end
+
+  def location
+    [@x, @y]
+  end
+
+  def move(new_x, new_y)
+    return if new_x == @x && new_y == @y
+    @object_pool.tree_remove(self)
+    @x = new_x
+    @y = new_y
+    @object_pool.tree_insert(self)
   end
 
   def update

@@ -10,6 +10,7 @@ require_pattern = File.join(root_dir, '**/*.rb')
 
 # Dynamically require everything
 Dir.glob(require_pattern).each do |f|
+  next if f.end_with?('_spec.rb')
   next if f.end_with?('/main.rb')
   begin
     require_relative f.gsub("#{root_dir}/", '')

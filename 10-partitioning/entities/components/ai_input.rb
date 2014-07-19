@@ -1,7 +1,7 @@
 class AiInput < Component
   # Dark red
   NAME_COLOR = Gosu::Color.argb(0xeeb10000)
-  UPDATE_RATE = 200 # ms
+  UPDATE_RATE = 500 # ms
   attr_reader :name
 
   def initialize(name, object_pool)
@@ -60,7 +60,7 @@ class AiInput < Component
   def respawn
     if object.health.should_respawn?
       object.health.restore
-      object.x, object.y = @object_pool.map.spawn_point
+      object.move(*@object_pool.map.spawn_point)
       PlayerSounds.respawn(object, @object_pool.camera)
     end
   end

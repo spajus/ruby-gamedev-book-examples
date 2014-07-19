@@ -5,9 +5,9 @@ class PlayState < GameState
     # http://www.paulandstorm.com/wha/clown-names/
     @names = Names.new(
       Utils.media_path('names.txt'))
-    @object_pool = ObjectPool.new
+    @object_pool = ObjectPool.new(Map.bounding_box)
     @map = Map.new(@object_pool)
-    @map.spawn_points(15)
+    @map.spawn_points(20)
     @camera = Camera.new
     @tank = Tank.new(@object_pool,
       PlayerInput.new('Player', @camera, @object_pool))
@@ -18,13 +18,12 @@ class PlayState < GameState
       Tank.new(@object_pool, AiInput.new(
         @names.random, @object_pool))
     end
-    puts "Object Pool: #{@object_pool.objects.size}"
+    puts "Pool size: #{@object_pool.size}"
   end
 
   def update
     StereoSample.cleanup
-    @object_pool.objects.map(&:update)
-    @object_pool.objects.reject!(&:removable?)
+    @object_pool.update_all
     @camera.update
     @radar.update
     update_caption
@@ -36,6 +35,10 @@ class PlayState < GameState
     off_x =  $window.width / 2 - cam_x
     off_y =  $window.height / 2 - cam_y
     viewport = @camera.viewport
+    #x1, x2, y1, y2 = viewport
+    #box = AxisAlignedBoundingBox.new(
+    #  [x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2],
+    #  [x1 - Map::TILE_SIZE, y1 - Map::TILE_SIZE])
     $window.translate(off_x, off_y) do
       zoom = @camera.zoom
       $window.scale(zoom, zoom, cam_x, cam_y) do
@@ -75,6 +78,13 @@ class PlayState < GameState
     end
   end
 
+  def leave
+    if @profiling_now
+      toggle_profiling
+    end
+    puts "Pool: #{@object_pool.size}"
+  end
+
   private
 
   def toggle_profiling
@@ -82,7 +92,7 @@ class PlayState < GameState
     if @profiling_now
       result = RubyProf.stop
       printer = RubyProf::FlatPrinter.new(result)
-      printer.print(STDOUT)
+      printer.print(STDOUT, min_percent: 1)
       @profiling_now = false
     else
       RubyProf.start

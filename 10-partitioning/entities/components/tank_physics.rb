@@ -10,10 +10,9 @@ class TankPhysics < Component
 
   def can_move_to?(x, y)
     old_x, old_y = object.x, object.y
-    object.x = x
-    object.y = y
+    object.move(x, y)
     return false unless @map.can_move_to?(x, y)
-    @object_pool.nearby(object, 100).each do |obj|
+    @object_pool.nearby(object, 50).each do |obj|
       next if obj.class == Bullet && obj.source == object
       if collides_with_poly?(obj.box)
         @collides_with = obj
@@ -29,8 +28,7 @@ class TankPhysics < Component
     end
     true
   ensure
-    object.x = old_x
-    object.y = old_y
+    object.move(old_x, old_y)
   end
 
   def change_direction(new_direction)
@@ -122,7 +120,7 @@ class TankPhysics < Component
         new_y -= shift
       end
       if can_move_to?(new_x, new_y)
-        object.x, object.y = new_x, new_y
+        object.move(new_x, new_y)
         @in_collision = false
       else
         object.on_collision(@collides_with)

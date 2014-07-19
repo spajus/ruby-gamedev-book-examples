@@ -18,8 +18,12 @@ class TankHealth < Health
 
   def after_death
     @death_time = Gosu.milliseconds
-    Thread.new do
-      sleep(rand(0.1..0.3))
+    if Thread.list.count < 8
+      Thread.new do
+        sleep(rand(0.1..0.3))
+        Explosion.new(@object_pool, x, y)
+      end
+    else
       Explosion.new(@object_pool, x, y)
     end
   end

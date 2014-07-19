@@ -58,10 +58,15 @@ class Health < Component
 
   def after_death
     if @explodes
-      Thread.new do
-        sleep(rand(0.1..0.3))
+      if Thread.list.count < 8
+        Thread.new do
+          sleep(rand(0.1..0.3))
+          Explosion.new(@object_pool, x, y)
+          sleep 0.3
+          object.mark_for_removal
+        end
+      else
         Explosion.new(@object_pool, x, y)
-        sleep 0.3
         object.mark_for_removal
       end
     else

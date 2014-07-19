@@ -67,6 +67,7 @@ class Camera
       @zoom += zoom_delta unless @zoom > 10
     else
       target_zoom = @target.physics.speed > 1.1 ? 0.75 : 1.0
+      target_zoom = 0.5
       if @zoom <= (target_zoom - 0.01)
         @zoom += zoom_delta / 3
       elsif @zoom > (target_zoom + 0.01)

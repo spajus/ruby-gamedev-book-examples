@@ -3,6 +3,14 @@ class Map
   MAP_HEIGHT = 30
   TILE_SIZE = 128
 
+  def self.bounding_box
+    center = [MAP_WIDTH * TILE_SIZE / 2,
+              MAP_HEIGHT * TILE_SIZE / 2]
+    half_dimension = [MAP_WIDTH * TILE_SIZE,
+                      MAP_HEIGHT * TILE_SIZE]
+    AxisAlignedBoundingBox.new(center, half_dimension)
+  end
+
   def initialize(object_pool)
     load_tiles
     @object_pool = object_pool
@@ -100,7 +108,7 @@ class Map
     contrast = Perlin::Curve.contrast(
       Perlin::Curve::CUBIC, 2)
     trees = 0
-    target_trees = rand(300..500)
+    target_trees = rand(1500..3000)
     while trees < target_trees do
       x = rand(0..MAP_WIDTH * TILE_SIZE)
       y = rand(0..MAP_HEIGHT * TILE_SIZE)

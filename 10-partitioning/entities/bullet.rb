@@ -1,9 +1,8 @@
 class Bullet < GameObject
-  attr_accessor :x, :y, :target_x, :target_y, :source, :speed, :fired_at
+  attr_accessor :target_x, :target_y, :source, :speed, :fired_at
 
   def initialize(object_pool, source_x, source_y, target_x, target_y)
-    super(object_pool)
-    @x, @y = source_x, source_y
+    super(object_pool, source_x, source_y)
     @target_x, @target_y = target_x, target_y
     BulletPhysics.new(self, object_pool)
     BulletGraphics.new(self)
@@ -11,7 +10,7 @@ class Bullet < GameObject
   end
 
   def box
-    [x, y]
+    [@x, @y]
   end
 
   def explode
