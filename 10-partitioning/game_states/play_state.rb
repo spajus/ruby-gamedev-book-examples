@@ -35,7 +35,7 @@ class PlayState < GameState
     off_x =  $window.width / 2 - cam_x
     off_y =  $window.height / 2 - cam_y
     viewport = @camera.viewport
-    #x1, x2, y1, y2 = viewport
+    # x1, x2, y1, y2 = viewport
     #box = AxisAlignedBoundingBox.new(
     #  [x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2],
     #  [x1 - Map::TILE_SIZE, y1 - Map::TILE_SIZE])
@@ -79,6 +79,7 @@ class PlayState < GameState
   end
 
   def leave
+    StereoSample.stop_all
     if @profiling_now
       toggle_profiling
     end

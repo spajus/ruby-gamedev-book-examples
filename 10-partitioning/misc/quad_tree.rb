@@ -1,18 +1,10 @@
 class QuadTree
   NODE_CAPACITY = 16
   attr_accessor :ne, :nw, :se, :sw, :objects
-  @@size = 0
+
   def initialize(boundary)
     @boundary = boundary
     @objects = []
-  end
-
-  def self.reset_size
-    @@size = 0
-  end
-
-  def size
-    @@size
   end
 
   def insert(game_object)
@@ -21,7 +13,6 @@ class QuadTree
 
     if @objects.size < NODE_CAPACITY
       @objects << game_object
-      @@size += 1
       return true
     end
 
@@ -33,14 +24,13 @@ class QuadTree
     return true if @se.insert(game_object)
 
     # should never happen
-    raise "Failed to insert #{game_object.location}. @obj: #{@objects}, box: #{@boundary}"
+    raise "Failed to insert #{game_object}"
   end
 
   def remove(game_object)
     return false unless @boundary.contains?(
       game_object.location)
     if @objects.delete(game_object)
-      @@size -= 1
       return true
     end
     return false unless @nw

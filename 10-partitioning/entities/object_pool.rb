@@ -2,7 +2,7 @@ class ObjectPool
   attr_accessor :map, :camera, :objects
 
   def size
-    "ob: #{@objects.size}; tr: #{@tree.size}"
+    @objects.size
   end
 
   def initialize(box)

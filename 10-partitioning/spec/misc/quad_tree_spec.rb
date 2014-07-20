@@ -116,7 +116,6 @@ describe QuadTree do
 
     context 'all objects' do
       before do
-        QuadTree.reset_size
         50.times do
           tree.insert(
             GameObject.new(
@@ -127,11 +126,11 @@ describe QuadTree do
       subject { tree.query_range(box) }
 
       it 'removes it' do
-        expect(tree.size).to equal(50)
+        expect(subject.size).to equal(50)
         subject.each do |ob|
           expect(tree.remove(ob)).to be_truthy
         end
-        expect(tree.size).to equal(0)
+        expect(tree.query_range(box).size).to equal(0)
       end
     end
   end
