@@ -1,5 +1,5 @@
 class QuadTree
-  NODE_CAPACITY = 16
+  NODE_CAPACITY = 12
   attr_accessor :ne, :nw, :se, :sw, :objects
 
   def initialize(boundary)

@@ -108,7 +108,7 @@ class Map
     contrast = Perlin::Curve.contrast(
       Perlin::Curve::CUBIC, 2)
     trees = 0
-    target_trees = rand(500..1000)
+    target_trees = rand(1500..1500)
     while trees < target_trees do
       x = rand(0..MAP_WIDTH * TILE_SIZE)
       y = rand(0..MAP_HEIGHT * TILE_SIZE)
@@ -123,7 +123,7 @@ class Map
 
   def generate_boxes
     boxes = 0
-    target_boxes = rand(10..30)
+    target_boxes = rand(50..200)
     while boxes < target_boxes do
       x = rand(0..MAP_WIDTH * TILE_SIZE)
       y = rand(0..MAP_HEIGHT * TILE_SIZE)
