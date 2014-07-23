@@ -12,7 +12,7 @@ class TankPhysics < Component
     old_x, old_y = object.x, object.y
     object.move(x, y)
     return false unless @map.can_move_to?(x, y)
-    @object_pool.nearby(object, 50).each do |obj|
+    @object_pool.nearby(object, 100).each do |obj|
       next if obj.class == Bullet && obj.source == object
       if collides_with_poly?(obj.box)
         @collides_with = obj

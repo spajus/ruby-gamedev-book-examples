@@ -35,15 +35,15 @@ class PlayState < GameState
     off_x =  $window.width / 2 - cam_x
     off_y =  $window.height / 2 - cam_y
     viewport = @camera.viewport
-    # x1, x2, y1, y2 = viewport
-    #box = AxisAlignedBoundingBox.new(
-    #  [x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2],
-    #  [x1 - Map::TILE_SIZE, y1 - Map::TILE_SIZE])
+    x1, x2, y1, y2 = viewport
+    box = AxisAlignedBoundingBox.new(
+      [x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2],
+      [x1 - Map::TILE_SIZE, y1 - Map::TILE_SIZE])
     $window.translate(off_x, off_y) do
       zoom = @camera.zoom
       $window.scale(zoom, zoom, cam_x, cam_y) do
         @map.draw(viewport)
-        @object_pool.objects.map { |o| o.draw(viewport) }
+        @object_pool.query_range(box).map { |o| o.draw(viewport) }
       end
     end
     @camera.draw_crosshair
@@ -93,7 +93,7 @@ class PlayState < GameState
     if @profiling_now
       result = RubyProf.stop
       printer = RubyProf::FlatPrinter.new(result)
-      printer.print(STDOUT, min_percent: 1)
+      printer.print(STDOUT, min_percent: 0.01)
       @profiling_now = false
     else
       RubyProf.start

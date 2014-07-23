@@ -12,7 +12,7 @@ class ObjectPool
 
   def add(object)
     @objects << object
-    @tree.insert(object) unless object.effect?
+    @tree.insert(object)
   end
 
   def tree_remove(object)
@@ -36,8 +36,10 @@ class ObjectPool
   def nearby(object, max_distance)
     cx, cy = object.location
     hx, hy = cx + max_distance, cy + max_distance
+    # Fast, rough results
     results = @tree.query_range(
       AxisAlignedBoundingBox.new([cx, cy], [hx, hy]))
+    # Sift through to select fine-grained results
     results.select do |o|
       o != object &&
         Utils.distance_between(
