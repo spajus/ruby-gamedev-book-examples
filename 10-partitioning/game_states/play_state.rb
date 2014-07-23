@@ -43,7 +43,9 @@ class PlayState < GameState
       zoom = @camera.zoom
       $window.scale(zoom, zoom, cam_x, cam_y) do
         @map.draw(viewport)
-        @object_pool.query_range(box).map { |o| o.draw(viewport) }
+        @object_pool.query_range(box).map do |o|
+          o.draw(viewport)
+        end
       end
     end
     @camera.draw_crosshair
