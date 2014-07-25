@@ -15,13 +15,17 @@ class TankPhysics < Component
     @object_pool.nearby(object, 100).each do |obj|
       next if obj.class == Bullet && obj.source == object
       if collides_with_poly?(obj.box)
-        @collides_with = obj
-        # Allow to get unstuck
-        old_distance = Utils.distance_between(
-          obj.x, obj.y, old_x, old_y)
-        new_distance = Utils.distance_between(
-          obj.x, obj.y, x, y)
-        return false if new_distance < old_distance
+        if obj.is_a? Powerup
+          obj.on_collision(object)
+        else
+          @collides_with = obj
+          # Allow to get unstuck
+          old_distance = Utils.distance_between(
+            obj.x, obj.y, old_x, old_y)
+          new_distance = Utils.distance_between(
+            obj.x, obj.y, x, y)
+          return false if new_distance < old_distance
+        end
       else
         @collides_with = nil
       end

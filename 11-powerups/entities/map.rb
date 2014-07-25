@@ -18,6 +18,7 @@ class Map
     @map = generate_map
     generate_trees
     generate_boxes
+    generate_powerups
   end
 
   def spawn_points(max)
@@ -130,6 +131,19 @@ class Map
       if tile_at(x, y) != @water
         Box.new(@object_pool, x, y)
         boxes += 1
+      end
+    end
+  end
+
+  def generate_powerups
+    pups = 0
+    target_pups = rand(50..200)
+    while pups < target_pups do
+      x = rand(0..MAP_WIDTH * TILE_SIZE)
+      y = rand(0..MAP_HEIGHT * TILE_SIZE)
+      if tile_at(x, y) != @water
+        HealthPowerup.new(@object_pool, x, y)
+        pups += 1
       end
     end
   end

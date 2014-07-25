@@ -14,6 +14,10 @@ class Health < Component
     @health_updated = true
   end
 
+  def damaged?
+    @health < @initial_health
+  end
+
   def dead?
     @health < 1
   end
