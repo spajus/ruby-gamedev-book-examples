@@ -142,10 +142,14 @@ class Map
       x = rand(0..MAP_WIDTH * TILE_SIZE)
       y = rand(0..MAP_HEIGHT * TILE_SIZE)
       if tile_at(x, y) != @water
-        HealthPowerup.new(@object_pool, x, y)
+        random_powerup.new(@object_pool, x, y)
         pups += 1
       end
     end
+  end
+
+  def random_powerup
+    [HealthPowerup, BulletSpeedPowerup].sample
   end
 
   def choose_tile(val)
