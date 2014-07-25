@@ -9,6 +9,7 @@
 - http://opengameart.org/content/high-resolution-crosshairs
 - http://opengameart.org/content/boxes-and-barrels
 - http://opengameart.org/content/details-for-damaged-and-dirty-textures
+- http://opengameart.org/content/pickups-powerups
 
 ## Audio
 
