@@ -42,12 +42,12 @@ class Tank < GameObject
     if can_shoot?
       @last_shot = Gosu.milliseconds
       Bullet.new(object_pool, @x, @y, target_x, target_y).fire(
-        self, 100 * @bullet_speed_modifier)
+        self, 100)
     end
   end
 
   def can_shoot?
-    Gosu.milliseconds - (@last_shot || 0) > SHOOT_DELAY
+    Gosu.milliseconds - (@last_shot || 0) > (SHOOT_DELAY / @bullet_speed_modifier)
   end
 
   def to_s
