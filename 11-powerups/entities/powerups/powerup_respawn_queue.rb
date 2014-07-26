@@ -1,4 +1,4 @@
-class PowerupRespawner
+class PowerupRespawnQueue
   RESPAWN_DELAY = 1000
   def initialize
     @respawn_queue = {}

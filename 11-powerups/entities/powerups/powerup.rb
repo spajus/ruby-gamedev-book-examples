@@ -23,7 +23,7 @@ class Powerup < GameObject
   end
 
   def remove
-    object_pool.powerup_respawner.enqueue(
+    object_pool.powerup_respawn_queue.enqueue(
       respawn_delay,
       self.class, x, y)
     mark_for_removal
