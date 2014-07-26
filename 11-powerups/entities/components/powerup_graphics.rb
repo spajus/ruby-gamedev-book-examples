@@ -1,5 +1,9 @@
 class PowerupGraphics < Component
-  attr_accessor :type
+  def initialize(object, type)
+    super(object)
+    @type = type
+  end
+
   def draw(viewport)
     image.draw(x - 12, y - 12, 1)
     Utils.mark_corners(object.box) if $debug

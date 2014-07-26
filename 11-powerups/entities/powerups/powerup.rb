@@ -1,8 +1,7 @@
 class Powerup < GameObject
   def initialize(object_pool, x, y)
     super
-    gfx = PowerupGraphics.new(self)
-    gfx.type = graphics
+    PowerupGraphics.new(self, graphics)
   end
 
   def box
@@ -13,8 +12,14 @@ class Powerup < GameObject
   end
 
   def on_collision(object)
-    PowerupSounds.play(object, object_pool.camera)
-    mark_for_removal
+    if pickup(object)
+      PowerupSounds.play(object, object_pool.camera)
+      mark_for_removal
+    end
+  end
+
+  def pickup(object)
+    # override and implement
   end
 
   def mark_for_removal

@@ -1,10 +1,10 @@
 class RepairPowerup < Powerup
-  def on_collision(object)
+  def pickup(object)
     if object.class == Tank
       if object.health.health < 100
         object.health.restore
       end
-      super
+      true
     end
   end
 
