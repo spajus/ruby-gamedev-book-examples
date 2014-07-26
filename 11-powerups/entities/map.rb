@@ -149,7 +149,7 @@ class Map
   end
 
   def random_powerup
-    [HealthPowerup, BulletSpeedPowerup].sample
+    [HealthPowerup, BulletSpeedPowerup, TankSpeedPowerup].sample
   end
 
   def choose_tile(val)

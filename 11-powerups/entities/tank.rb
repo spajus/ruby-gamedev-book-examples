@@ -2,7 +2,7 @@ class Tank < GameObject
   SHOOT_DELAY = 500
   attr_accessor :throttle_down, :direction,
     :gun_angle, :sounds, :physics, :graphics, :health, :input,
-    :bullet_speed_modifier
+    :bullet_speed_modifier, :speed_modifier
 
   def initialize(object_pool, input)
     x, y = object_pool.map.spawn_point
@@ -15,7 +15,7 @@ class Tank < GameObject
     @graphics = TankGraphics.new(self)
     @direction = rand(0..7) * 45
     @gun_angle = rand(0..360)
-    @bullet_speed_modifier = 1
+    reset_modifiers
   end
 
   def box
@@ -48,6 +48,11 @@ class Tank < GameObject
 
   def can_shoot?
     Gosu.milliseconds - (@last_shot || 0) > (SHOOT_DELAY / @bullet_speed_modifier)
+  end
+
+  def reset_modifiers
+    @bullet_speed_modifier = 1
+    @speed_modifier = 1
   end
 
   def to_s
