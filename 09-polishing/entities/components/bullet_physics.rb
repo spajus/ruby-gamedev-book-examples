@@ -13,9 +13,11 @@ class BulletPhysics < Component
 
   def update
     fly_speed = Utils.adjust_speed(object.speed)
-    fly_distance = (Gosu.milliseconds - object.fired_at) *
-      0.001 * fly_speed / 2
+    now = Gosu.milliseconds
+    @last_update ||= object.fired_at
+    fly_distance = (now - @last_update) * 0.001 * fly_speed
     object.x, object.y = point_at_distance(fly_distance)
+    @last_update = now
     check_hit
     object.explode if arrived?
   end

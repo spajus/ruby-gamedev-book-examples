@@ -39,7 +39,7 @@ class Tank < GameObject
   def shoot(target_x, target_y)
     if can_shoot?
       @last_shot = Gosu.milliseconds
-      Bullet.new(object_pool, @x, @y, target_x, target_y).fire(self, 100)
+      Bullet.new(object_pool, @x, @y, target_x, target_y).fire(self, 1500)
     end
   end
 
