@@ -14,19 +14,19 @@ class Powerup < GameObject
   def on_collision(object)
     if pickup(object)
       PowerupSounds.play(object, object_pool.camera)
-      mark_for_removal
+      remove
     end
   end
 
   def pickup(object)
-    # override and implement
+    # override and implement application
   end
 
-  def mark_for_removal
+  def remove
     object_pool.powerup_respawner.enqueue(
       respawn_delay,
       self.class, x, y)
-    super
+    mark_for_removal
   end
 
   def respawn_delay

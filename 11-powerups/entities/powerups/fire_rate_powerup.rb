@@ -1,8 +1,8 @@
-class BulletSpeedPowerup < Powerup
+class FireRatePowerup < Powerup
   def pickup(object)
     if object.class == Tank
-      if object.bullet_speed_modifier < 2
-        object.bullet_speed_modifier += 0.25
+      if object.fire_rate_modifier < 2
+        object.fire_rate_modifier += 0.25
       end
       true
     end

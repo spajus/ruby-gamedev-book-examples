@@ -151,7 +151,7 @@ class Map
   def random_powerup
     [HealthPowerup,
      RepairPowerup,
-     BulletSpeedPowerup,
+     FireRatePowerup,
      TankSpeedPowerup].sample
   end
 
