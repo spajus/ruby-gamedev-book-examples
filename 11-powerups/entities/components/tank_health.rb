@@ -17,8 +17,8 @@ class TankHealth < Health
   end
 
   def after_death
-    @death_time = Gosu.milliseconds
     object.reset_modifiers
+    @death_time = Gosu.milliseconds
     Thread.new do
       sleep(rand(0.1..0.3))
       Explosion.new(@object_pool, x, y)
