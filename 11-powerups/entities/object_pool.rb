@@ -1,5 +1,5 @@
 class ObjectPool
-  attr_accessor :map, :camera, :objects
+  attr_accessor :map, :camera, :objects, :powerup_respawner
 
   def size
     @objects.size
@@ -7,6 +7,7 @@ class ObjectPool
 
   def initialize(box)
     @tree = QuadTree.new(box)
+    @powerup_respawner = PowerupRespawner.new
     @objects = []
   end
 
@@ -31,6 +32,7 @@ class ObjectPool
         true
       end
     end
+    @powerup_respawner.respawn(self)
   end
 
   def nearby(object, max_distance)
