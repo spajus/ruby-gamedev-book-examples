@@ -8,7 +8,7 @@ class HealthPowerup < Powerup
 
   def on_collision(object)
     if object.class == Tank
-      object.health.restore
+      object.health.increase(25)
       super
     end
   end

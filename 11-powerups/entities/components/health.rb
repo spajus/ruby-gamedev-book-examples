@@ -14,6 +14,11 @@ class Health < Component
     @health_updated = true
   end
 
+  def increase(amount)
+    @health = [@health + 25, @initial_health * 2].min
+    @health_updated = true
+  end
+
   def damaged?
     @health < @initial_health
   end
