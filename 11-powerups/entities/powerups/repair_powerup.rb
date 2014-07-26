@@ -1,11 +1,4 @@
 class RepairPowerup < Powerup
-
-  def initialize(object_pool, x, y)
-    super
-    gfx = PowerupGraphics.new(self)
-    gfx.type = :repair
-  end
-
   def on_collision(object)
     if object.class == Tank
       if object.health.health < 100
@@ -15,4 +8,7 @@ class RepairPowerup < Powerup
     end
   end
 
+  def graphics
+    :repair
+  end
 end

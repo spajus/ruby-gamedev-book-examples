@@ -1,11 +1,4 @@
 class BulletSpeedPowerup < Powerup
-
-  def initialize(object_pool, x, y)
-    super
-    gfx = PowerupGraphics.new(self)
-    gfx.type = :straight_gun
-  end
-
   def on_collision(object)
     if object.class == Tank
       if object.bullet_speed_modifier < 3
@@ -15,4 +8,7 @@ class BulletSpeedPowerup < Powerup
     end
   end
 
+  def graphics
+    :straight_gun
+  end
 end
