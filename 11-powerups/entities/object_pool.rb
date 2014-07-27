@@ -25,7 +25,7 @@ class ObjectPool
   end
 
   def update_all
-    @objects.map(&:update)
+    @objects.each(&:update)
     @objects.reject! do |o|
       if o.removable?
         @tree.remove(o)
