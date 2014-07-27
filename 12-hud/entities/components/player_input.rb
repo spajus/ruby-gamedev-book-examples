@@ -1,10 +1,12 @@
 class PlayerInput < Component
   # Dark green
   NAME_COLOR = Gosu::Color.argb(0xee084408)
+  attr_reader :stats
 
   def initialize(name, camera, object_pool)
     super(nil)
     @name = name
+    @stats = Stats.new(name)
     @camera = camera
     @object_pool = object_pool
   end
@@ -18,6 +20,7 @@ class PlayerInput < Component
   end
 
   def on_damage(amount)
+    @stats.add_damage(amount)
   end
 
   def update

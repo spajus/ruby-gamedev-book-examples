@@ -13,11 +13,11 @@ class PlayState < GameState
       PlayerInput.new('Player', @camera, @object_pool))
     @camera.target = @tank
     @object_pool.camera = @camera
-    @radar = Radar.new(@object_pool, @tank)
     5.times do |i|
       Tank.new(@object_pool, AiInput.new(
         @names.random, @object_pool))
     end
+    @hud = HUD.new(@object_pool, @tank)
     puts "Pool size: #{@object_pool.size}"
   end
 
@@ -25,7 +25,7 @@ class PlayState < GameState
     StereoSample.cleanup
     @object_pool.update_all
     @camera.update
-    @radar.update
+    @hud.update
     update_caption
   end
 
@@ -48,8 +48,7 @@ class PlayState < GameState
         end
       end
     end
-    @camera.draw_crosshair
-    @radar.draw
+    @hud.draw
   end
 
   def button_down(id)
@@ -63,7 +62,7 @@ class PlayState < GameState
     if id == Gosu::KbT
       t = Tank.new(@object_pool,
         AiInput.new(@names.random, @object_pool))
-      t.x, t.y = @camera.mouse_coords
+      t.move(*@camera.mouse_coords)
     end
     if id == Gosu::KbF1
       $debug = !$debug
@@ -71,12 +70,15 @@ class PlayState < GameState
     if id == Gosu::KbF2
       toggle_profiling
     end
+    if id == Gosu::KbF3
+      puts @tank
+    end
     if id == Gosu::KbR
       @tank.mark_for_removal
       @tank = Tank.new(@object_pool,
         PlayerInput.new('Player', @camera, @object_pool))
       @camera.target = @tank
-      @radar.target = @tank
+      @hud.player = @tank
     end
   end
 

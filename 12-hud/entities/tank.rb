@@ -43,6 +43,7 @@ class Tank < GameObject
       @last_shot = Gosu.milliseconds
       Bullet.new(object_pool, @x, @y, target_x, target_y).fire(
         self, 1500)
+      input.stats.add_shot
     end
   end
 
@@ -57,7 +58,7 @@ class Tank < GameObject
   end
 
   def to_s
-    "Tank [#{@health.health}@#{@x}:#{@y}@#{@physics.speed.round(2)}px/tick]"
+    "Tank [#{@health.health}@#{@x}:#{@y}@#{@physics.speed.round(2)}px/tick]#{@input.stats}"
   end
 
 end

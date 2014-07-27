@@ -7,14 +7,18 @@ module Utils
     Gosu::Color::WHITE
   ]
   def self.media_path(file)
-    File.join(File.dirname(File.dirname(
-      __FILE__)), 'media', file)
+    File.join(File.dirname(File.dirname(File.dirname(
+      __FILE__))), 'media', file)
   end
 
   def self.track_update_interval
     now = Gosu.milliseconds
     @update_interval = (now - (@last_update ||= 0)).to_f
     @last_update = now
+  end
+
+  def self.top_secret_font
+    media_path('top-secret.ttf')
   end
 
   def self.update_interval

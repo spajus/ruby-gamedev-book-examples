@@ -31,11 +31,18 @@ class Health < Component
     update_image
   end
 
-  def inflict_damage(amount)
+  def inflict_damage(amount, cause)
     if @health > 0
       @health_updated = true
+      if object.respond_to?(:input)
+        object.input.stats.add_damage(amount)
+        # Don't count damage to trees and boxes
+        if cause.respond_to?(:input) && cause != object
+          cause.input.stats.add_damage_dealt(amount)
+        end
+      end
       @health = [@health - amount.to_i, 0].max
-      after_death if dead?
+      after_death(cause) if dead?
     end
   end
 
@@ -65,11 +72,11 @@ class Health < Component
     end
   end
 
-  def after_death
+  def after_death(source)
     if @explodes
       Thread.new do
         sleep(rand(0.1..0.3))
-        Explosion.new(@object_pool, x, y)
+        Explosion.new(@object_pool, x, y, object)
         sleep 0.3
         object.mark_for_removal
       end
