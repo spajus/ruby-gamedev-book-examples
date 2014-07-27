@@ -17,8 +17,12 @@ module Utils
     @last_update = now
   end
 
-  def self.top_secret_font
-    media_path('top-secret.ttf')
+  def self.title_font
+    media_path('top_secret.ttf')
+  end
+
+  def self.main_font
+    media_path('armalite_rifle.ttf')
   end
 
   def self.update_interval

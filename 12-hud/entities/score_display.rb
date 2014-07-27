@@ -12,16 +12,16 @@ class ScoreDisplay
 
   def create_stats_image(stats)
     text = stats.map do |stat|
-      "[#{stat.kills}] #{stat.name}"
+      "#{stat.kills}: #{stat.name} "
     end.join("\n")
     @stats_image = Gosu::Image.from_text(
-      $window, text, Utils.top_secret_font, 30)
+      $window, text, Utils.main_font, 30)
   end
 
   def draw
     @stats_image.draw(
       $window.width / 2 - @stats_image.width / 2,
-      $window.height / 4 + 100,
+      $window.height / 4 + 30,
       1000)
   end
 end

@@ -6,7 +6,7 @@ class MenuState < GameState
   def initialize
     @message = Gosu::Image.from_text(
       $window, "Tanks Prototype",
-      Utils.top_secret_font, 60)
+      Utils.title_font, 60)
   end
 
   def enter
@@ -25,10 +25,9 @@ class MenuState < GameState
   end
 
   def update
-    continue_text = @play_state ? "C = Continue, " : ""
     @info = Gosu::Image.from_text(
-      $window, "Q = Quit, #{continue_text}N = New Game",
-      Utils.top_secret_font, 30)
+      $window, "Q: Quit\nN: New Game",
+      Utils.main_font, 30)
   end
 
   def draw
@@ -38,7 +37,7 @@ class MenuState < GameState
       10)
     @info.draw(
       $window.width / 2 - @info.width / 2,
-      $window.height / 2 - @info.height / 2 + 200,
+      $window.height / 2 - @info.height / 2 + 100,
       10)
   end
 

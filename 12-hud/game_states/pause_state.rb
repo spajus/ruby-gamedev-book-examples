@@ -6,7 +6,7 @@ class PauseState < GameState
   def initialize
     @message = Gosu::Image.from_text(
       $window, "Game Paused",
-      Utils.top_secret_font, 60)
+      Utils.title_font, 60)
   end
 
   def enter
@@ -31,7 +31,7 @@ class PauseState < GameState
     continue_text = @play_state ? "C = Continue, " : ""
     @info = Gosu::Image.from_text(
       $window, "Q = Quit, #{continue_text}N = New Game",
-      Utils.top_secret_font, 30)
+      Utils.main_font, 30)
   end
 
   def draw

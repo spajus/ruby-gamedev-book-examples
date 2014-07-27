@@ -19,7 +19,7 @@ class HUD
     if @health.nil? || @player.health.health != @health
       @health = @player.health.health
       @health_image = Gosu::Image.from_text(
-        $window, "Health: #{@health}", Utils.top_secret_font, 20)
+        $window, "Health: #{@health}", Utils.main_font, 20)
     end
     @health_image
   end
@@ -28,7 +28,7 @@ class HUD
     stats = @player.input.stats
     if @stats_image.nil? || stats.changed_at <= Gosu.milliseconds
       @stats_image = Gosu::Image.from_text(
-        $window, "Kills: #{stats.kills}", Utils.top_secret_font, 20)
+        $window, "Kills: #{stats.kills}", Utils.main_font, 20)
     end
     @stats_image
   end
@@ -39,7 +39,7 @@ class HUD
         @fire_rate = @player.fire_rate_modifier
         @fire_rate_image = Gosu::Image.from_text(
           $window, "Fire rate: #{(100 * @fire_rate).round}%",
-          Utils.top_secret_font, 20)
+          Utils.main_font, 20)
       end
     else
       @fire_rate_image = nil
@@ -53,7 +53,7 @@ class HUD
         @speed = @player.speed_modifier
         @speed_image = Gosu::Image.from_text(
           $window, "Speed: #{(100 * @speed).round}%",
-          Utils.top_secret_font, 20)
+          Utils.main_font, 20)
       end
     else
       @speed_image = nil

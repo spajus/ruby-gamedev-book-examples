@@ -25,4 +25,5 @@
 ## Fonts
 
 - http://www.fontsquirrel.com/fonts/Top-Secret
+- http://www.fontsquirrel.com/fonts/Armalite-Rifle
 

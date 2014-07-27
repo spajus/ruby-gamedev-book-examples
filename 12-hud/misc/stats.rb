@@ -6,8 +6,8 @@ class Stats
     changed
   end
 
-  def add_kill
-    @kills += 1
+  def add_kill(amount = 1)
+    @kills += amount
     changed
   end
 
