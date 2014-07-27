@@ -7,7 +7,9 @@ class TankHealth < Health
   end
 
   def should_respawn?
-    Gosu.milliseconds - @death_time > RESPAWN_DELAY
+    if @death_time
+      Gosu.milliseconds - @death_time > RESPAWN_DELAY
+    end
   end
 
   protected
@@ -17,10 +19,10 @@ class TankHealth < Health
   end
 
   def after_death(source)
+    @death_time = Gosu.milliseconds
     object.reset_modifiers
     object.input.stats.add_death
     source.input.stats.add_kill
-    @death_time = Gosu.milliseconds
     Thread.new do
       sleep(rand(0.1..0.3))
       Explosion.new(@object_pool, x, y, object)

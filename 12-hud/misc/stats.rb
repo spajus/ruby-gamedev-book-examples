@@ -1,5 +1,5 @@
 class Stats
-  attr_reader :kills, :deaths, :shots, :changed_at
+  attr_reader :name, :kills, :deaths, :shots, :changed_at
   def initialize(name)
     @name = name
     @kills = @deaths = @shots = @damage = @damage_dealt = 0

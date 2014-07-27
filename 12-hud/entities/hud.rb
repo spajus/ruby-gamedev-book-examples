@@ -1,4 +1,5 @@
 class HUD
+  attr_accessor :active
   def initialize(object_pool, player)
     @object_pool = object_pool
     @player = player
@@ -61,8 +62,10 @@ class HUD
   end
 
   def draw
+    if @active
+      @object_pool.camera.draw_crosshair
+    end
     @radar.draw
-    @object_pool.camera.draw_crosshair
     offset = 20
     health_image.draw(20, offset, 1000)
     stats_image.draw(20, offset += 30, 1000)

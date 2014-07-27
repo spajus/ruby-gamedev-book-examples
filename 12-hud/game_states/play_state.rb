@@ -1,5 +1,5 @@
 class PlayState < GameState
-  attr_accessor :update_interval
+  attr_accessor :update_interval, :object_pool
 
   def initialize
     # http://www.paulandstorm.com/wha/clown-names/
@@ -13,7 +13,7 @@ class PlayState < GameState
       PlayerInput.new('Player', @camera, @object_pool))
     @camera.target = @tank
     @object_pool.camera = @camera
-    5.times do |i|
+    9.times do |i|
       Tank.new(@object_pool, AiInput.new(
         @names.random, @object_pool))
     end
@@ -57,7 +57,9 @@ class PlayState < GameState
       $window.close
     end
     if id == Gosu::KbEscape
-      GameState.switch(MenuState.instance)
+      pause = PauseState.instance
+      pause.play_state = self
+      GameState.switch(pause)
     end
     if id == Gosu::KbT
       t = Tank.new(@object_pool,
@@ -88,6 +90,11 @@ class PlayState < GameState
       toggle_profiling
     end
     puts "Pool: #{@object_pool.size}"
+    @hud.active = false
+  end
+
+  def enter
+    @hud.active = true
   end
 
   private
