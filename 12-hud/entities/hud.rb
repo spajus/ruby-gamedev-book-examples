@@ -38,7 +38,7 @@ class HUD
       if @fire_rate != @player.fire_rate_modifier
         @fire_rate = @player.fire_rate_modifier
         @fire_rate_image = Gosu::Image.from_text(
-          $window, "Fire rate: #{(100 * @fire_rate).round}%",
+          $window, "Fire rate: #{@fire_rate.round(2)}X",
           Utils.main_font, 20)
       end
     else
@@ -52,7 +52,7 @@ class HUD
       if @speed != @player.speed_modifier
         @speed = @player.speed_modifier
         @speed_image = Gosu::Image.from_text(
-          $window, "Speed: #{(100 * @speed).round}%",
+          $window, "Speed: #{@speed.round(2)}X",
           Utils.main_font, 20)
       end
     else
