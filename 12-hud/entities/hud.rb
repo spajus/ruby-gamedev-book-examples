@@ -1,14 +1,14 @@
 class HUD
   attr_accessor :active
-  def initialize(object_pool, player)
+  def initialize(object_pool, tank)
     @object_pool = object_pool
-    @player = player
-    @radar = Radar.new(@object_pool, player)
+    @tank = tank
+    @radar = Radar.new(@object_pool, tank)
   end
 
-  def player=(player)
-    @player = player
-    @radar.target = player
+  def player=(tank)
+    @tank = tank
+    @radar.target = tank
   end
 
   def update
@@ -16,8 +16,8 @@ class HUD
   end
 
   def health_image
-    if @health.nil? || @player.health.health != @health
-      @health = @player.health.health
+    if @health.nil? || @tank.health.health != @health
+      @health = @tank.health.health
       @health_image = Gosu::Image.from_text(
         $window, "Health: #{@health}", Utils.main_font, 20)
     end
@@ -25,7 +25,7 @@ class HUD
   end
 
   def stats_image
-    stats = @player.input.stats
+    stats = @tank.input.stats
     if @stats_image.nil? || stats.changed_at <= Gosu.milliseconds
       @stats_image = Gosu::Image.from_text(
         $window, "Kills: #{stats.kills}", Utils.main_font, 20)
@@ -34,9 +34,9 @@ class HUD
   end
 
   def fire_rate_image
-    if @player.fire_rate_modifier > 1
-      if @fire_rate != @player.fire_rate_modifier
-        @fire_rate = @player.fire_rate_modifier
+    if @tank.fire_rate_modifier > 1
+      if @fire_rate != @tank.fire_rate_modifier
+        @fire_rate = @tank.fire_rate_modifier
         @fire_rate_image = Gosu::Image.from_text(
           $window, "Fire rate: #{@fire_rate.round(2)}X",
           Utils.main_font, 20)
@@ -48,9 +48,9 @@ class HUD
   end
 
   def speed_image
-    if @player.speed_modifier > 1
-      if @speed != @player.speed_modifier
-        @speed = @player.speed_modifier
+    if @tank.speed_modifier > 1
+      if @speed != @tank.speed_modifier
+        @speed = @tank.speed_modifier
         @speed_image = Gosu::Image.from_text(
           $window, "Speed: #{@speed.round(2)}X",
           Utils.main_font, 20)
