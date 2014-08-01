@@ -40,7 +40,11 @@ class Stats
   end
 
   def to_s
-    "[kills: #{@kills}, deaths: #{@deaths}, shots: #{@shots}, damage: #{damage}, damage_dealt: #{damage_dealt}]"
+    "[kills: #{@kills}, " \
+      "deaths: #{@deaths}, " \
+      "shots: #{@shots}, " \
+      "damage: #{damage}, " \
+      "damage_dealt: #{damage_dealt}]"
   end
 
   private
