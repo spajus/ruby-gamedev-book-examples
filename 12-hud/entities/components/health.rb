@@ -72,11 +72,11 @@ class Health < Component
     end
   end
 
-  def after_death(source)
+  def after_death(cause)
     if @explodes
       Thread.new do
         sleep(rand(0.1..0.3))
-        Explosion.new(@object_pool, x, y, object)
+        Explosion.new(@object_pool, x, y, cause)
         sleep 0.3
         object.mark_for_removal
       end
