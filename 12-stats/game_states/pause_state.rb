@@ -27,13 +27,6 @@ class PauseState < GameState
       $window, Utils.media_path('menu_music.mp3'))
   end
 
-  def update
-    continue_text = @play_state ? "C = Continue, " : ""
-    @info = Gosu::Image.from_text(
-      $window, "Q = Quit, #{continue_text}N = New Game",
-      Utils.main_font, 30)
-  end
-
   def draw
     @play_state.draw
     @message.draw(
