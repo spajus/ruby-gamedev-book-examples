@@ -23,7 +23,7 @@ class TankHealth < Health
     object.reset_modifiers
     object.input.stats.add_death
     kill = object != cause ? 1 : -1
-    source.input.stats.add_kill(kill)
+    cause.input.stats.add_kill(kill)
     Thread.new do
       sleep(rand(0.1..0.3))
       Explosion.new(@object_pool, x, y, cause)
