@@ -13,7 +13,7 @@ class PlayState < GameState
       PlayerInput.new('Player', @camera, @object_pool))
     @camera.target = @tank
     @object_pool.camera = @camera
-    9.times do |i|
+    4.times do |i|
       Tank.new(@object_pool, AiInput.new(
         @names.random, @object_pool))
     end

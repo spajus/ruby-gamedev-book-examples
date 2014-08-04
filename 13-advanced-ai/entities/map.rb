@@ -172,7 +172,8 @@ class Map
     while true
       x = rand(0..MAP_WIDTH * TILE_SIZE)
       y = rand(0..MAP_HEIGHT * TILE_SIZE)
-      if can_move_to?(x, y)
+      if can_move_to?(x, y) &&
+          @object_pool.nearby_point(x, y, 100).empty?
         return [x, y]
       else
         puts "Invalid spawn point: #{[x, y]}"

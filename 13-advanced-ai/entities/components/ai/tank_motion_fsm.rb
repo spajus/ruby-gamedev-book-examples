@@ -9,6 +9,7 @@ class TankMotionFSM
     @fighting_state = TankFightingState.new(object, vision)
     @fleeing_state = TankFleeingState.new(object, vision, gun)
     @chasing_state = TankChasingState.new(object, vision, gun)
+    @stuck_state = TankStuckState.new(object, vision, gun)
     set_state(@roaming_state)
   end
 
@@ -52,6 +53,12 @@ class TankMotionFSM
   def choose_state
     return unless Gosu.milliseconds -
       (@last_state_change) > STATE_CHANGE_DELAY
+    unless @last_location.nil? || @current_state.waiting?
+      if Utils.distance_between(*@last_location, *@object.location) < 5
+        return set_state(@stuck_state)
+      end
+    end
+    @last_location = @object.location
     if @gun.target
       if @object.health.health > 40
         if @gun.distance_to_target > BulletPhysics::MAX_DIST

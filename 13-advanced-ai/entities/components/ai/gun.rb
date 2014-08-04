@@ -1,5 +1,5 @@
 class AiGun
-  DECISION_DELAY = 1000
+  DECISION_DELAY = 300
   attr_reader :target, :desired_gun_angle
 
   def initialize(object, vision)
@@ -26,7 +26,7 @@ class AiGun
     end
 
     if @target
-      if (0..10 - rand(0..@accuracy)).include?(
+      if (0..30 - rand(0..@accuracy)).include?(
         (@desired_gun_angle - @object.gun_angle).abs.round)
         distance = distance_to_target
         if distance - 50 <= BulletPhysics::MAX_DIST
@@ -63,7 +63,7 @@ class AiGun
 
 
   def should_shoot?
-    rand * @aggressiveness > 0.5
+    rand * @aggressiveness > 0.3
   end
 
   def can_make_new_decision?
