@@ -141,7 +141,8 @@ class Map
     while pups < target_pups do
       x = rand(0..MAP_WIDTH * TILE_SIZE)
       y = rand(0..MAP_HEIGHT * TILE_SIZE)
-      if tile_at(x, y) != @water
+      if tile_at(x, y) != @water &&
+          @object_pool.nearby_point(x, y, 100).empty?
         random_powerup.new(@object_pool, x, y)
         pups += 1
       end

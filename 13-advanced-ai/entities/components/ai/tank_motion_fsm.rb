@@ -51,6 +51,9 @@ class TankMotionFSM
   end
 
   def choose_state
+    unless @vision.can_go_forward?
+      set_state(@stuck_state)
+    end
     return unless Gosu.milliseconds -
       (@last_state_change) > STATE_CHANGE_DELAY
     unless @last_location.nil? || @current_state.waiting?

@@ -17,6 +17,7 @@ class PlayState < GameState
       Tank.new(@object_pool, AiInput.new(
         @names.random, @object_pool))
     end
+    @camera.target = @tank
     @hud = HUD.new(@object_pool, @tank)
     puts "Pool size: #{@object_pool.size}"
   end

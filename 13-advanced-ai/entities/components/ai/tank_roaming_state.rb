@@ -40,6 +40,12 @@ class TankRoamingState < TankMotionState
         closest_powerup.x, closest_powerup.y)
       @object.physics.change_direction(
         angle - angle % 45)
+      # Go away from inaccessable powerup
+      unless @vision.can_go_forward?
+        @seeking_powerup = false
+        @object.physics.change_direction(
+          @object.direction + 180)
+      end
     else
       @seeking_powerup = false
       change = case rand(0..100)
