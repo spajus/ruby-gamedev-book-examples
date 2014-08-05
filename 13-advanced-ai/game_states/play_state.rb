@@ -86,10 +86,6 @@ class PlayState < GameState
 
   private
 
-  def extra_button_down(id)
-    # Template method
-  end
-
   def create_tanks(amount)
     @map.spawn_points(amount * 3)
     @tank = Tank.new(@object_pool,
