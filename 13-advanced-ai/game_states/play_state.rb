@@ -8,6 +8,7 @@ class PlayState < GameState
     @object_pool = ObjectPool.new(Map.bounding_box)
     @map = Map.new(@object_pool)
     @camera = Camera.new
+    @object_pool.camera = @camera
     create_tanks(4)
   end
 
@@ -93,7 +94,6 @@ class PlayState < GameState
     @map.spawn_points(amount * 3)
     @tank = Tank.new(@object_pool,
       PlayerInput.new('Player', @camera, @object_pool))
-    @object_pool.camera = @camera
     amount.times do |i|
       Tank.new(@object_pool, AiInput.new(
         @names.random, @object_pool))
