@@ -7,7 +7,7 @@ class PlayState < GameState
       Utils.media_path('names.txt'))
     @object_pool = ObjectPool.new(Map.bounding_box)
     @map = Map.new(@object_pool)
-    @map.spawn_points(100)
+    @map.spawn_points(20)
     @camera = Camera.new
     @tank = Tank.new(@object_pool,
       PlayerInput.new('Player', @camera, @object_pool))
