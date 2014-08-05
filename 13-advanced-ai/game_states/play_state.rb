@@ -7,19 +7,8 @@ class PlayState < GameState
       Utils.media_path('names.txt'))
     @object_pool = ObjectPool.new(Map.bounding_box)
     @map = Map.new(@object_pool)
-    @map.spawn_points(20)
     @camera = Camera.new
-    @tank = Tank.new(@object_pool,
-      PlayerInput.new('Player', @camera, @object_pool))
-    @camera.target = @tank
-    @object_pool.camera = @camera
-    4.times do |i|
-      Tank.new(@object_pool, AiInput.new(
-        @names.random, @object_pool))
-    end
-    @camera.target = @tank
-    @hud = HUD.new(@object_pool, @tank)
-    puts "Pool size: #{@object_pool.size}"
+    create_tanks(4)
   end
 
   def update
@@ -99,6 +88,19 @@ class PlayState < GameState
   end
 
   private
+
+  def create_tanks(amount)
+    @map.spawn_points(amount * 3)
+    @tank = Tank.new(@object_pool,
+      PlayerInput.new('Player', @camera, @object_pool))
+    @object_pool.camera = @camera
+    amount.times do |i|
+      Tank.new(@object_pool, AiInput.new(
+        @names.random, @object_pool))
+    end
+    @camera.target = @tank
+    @hud = HUD.new(@object_pool, @tank)
+  end
 
   def toggle_profiling
     require 'ruby-prof' unless defined?(RubyProf)
