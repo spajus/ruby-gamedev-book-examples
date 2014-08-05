@@ -5,6 +5,16 @@ class DemoState < PlayState
     # Prevent reactivating HUD
   end
 
+  def update
+    super
+    @score_display = ScoreDisplay.new(object_pool, 20)
+  end
+
+  def draw
+    super
+    @score_display.draw_top_right
+  end
+
   private
 
   def create_tanks(amount)
