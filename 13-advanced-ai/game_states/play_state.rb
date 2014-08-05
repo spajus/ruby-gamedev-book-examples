@@ -69,7 +69,6 @@ class PlayState < GameState
       @camera.target = @tank
       @hud.player = @tank
     end
-    extra_button_down(id)
   end
 
   def leave

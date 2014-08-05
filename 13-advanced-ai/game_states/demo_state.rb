@@ -7,7 +7,8 @@ class DemoState < PlayState
 
   def update
     super
-    @score_display = ScoreDisplay.new(object_pool, 20)
+    @score_display = ScoreDisplay.new(
+      object_pool, 20)
   end
 
   def draw
@@ -36,7 +37,8 @@ class DemoState < PlayState
     self.tank = tank
   end
 
-  def extra_button_down(id)
+  def button_down(id)
+    super
     if id == Gosu::KbSpace
       target_tank = @tanks.reject do |t|
         t == @camera.target
