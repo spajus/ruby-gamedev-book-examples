@@ -1,5 +1,5 @@
 class PlayState < GameState
-  attr_accessor :update_interval, :object_pool
+  attr_accessor :update_interval, :object_pool, :tank
 
   def initialize
     # http://www.paulandstorm.com/wha/clown-names/
@@ -43,10 +43,6 @@ class PlayState < GameState
   end
 
   def button_down(id)
-    if id == Gosu::KbQ
-      leave
-      $window.close
-    end
     if id == Gosu::KbEscape
       pause = PauseState.instance
       pause.play_state = self
@@ -73,6 +69,7 @@ class PlayState < GameState
       @camera.target = @tank
       @hud.player = @tank
     end
+    extra_button_down(id)
   end
 
   def leave
@@ -89,6 +86,10 @@ class PlayState < GameState
   end
 
   private
+
+  def extra_button_down(id)
+    # Template method
+  end
 
   def create_tanks(amount)
     @map.spawn_points(amount * 3)

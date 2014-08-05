@@ -31,13 +31,26 @@ class PauseState < GameState
     @play_state.draw
     @message.draw(
       $window.width / 2 - @message.width / 2,
-      $window.height / 4 - @message.height,
+      $window.height / 4 - @message.height - 50,
+      1000)
+    info.draw(
+      $window.width / 2 - info.width / 2,
+      $window.height / 4 - info.height,
       1000)
     @score_display.draw
   end
 
+  def info
+    @info ||= Gosu::Image.from_text(
+      $window, 'Q: Quit to Main Menu',
+      Utils.main_font, 30)
+  end
+
   def button_down(id)
-    $window.close if id == Gosu::KbQ
+    if id == Gosu::KbQ
+      MenuState.instance.play_state = @play_state
+      GameState.switch(MenuState.instance)
+    end
     if id == Gosu::KbC && @play_state
       GameState.switch(@play_state)
     end
