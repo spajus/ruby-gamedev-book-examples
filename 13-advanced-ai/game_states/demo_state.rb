@@ -16,6 +16,16 @@ class DemoState < PlayState
     @score_display.draw_top_right
   end
 
+  def button_down(id)
+    super
+    if id == Gosu::KbSpace
+      target_tank = @tanks.reject do |t|
+        t == @camera.target
+      end.sample
+      switch_to_tank(target_tank)
+    end
+  end
+
   private
 
   def create_tanks(amount)
@@ -35,15 +45,5 @@ class DemoState < PlayState
     @camera.target = tank
     @hud.player = tank
     self.tank = tank
-  end
-
-  def button_down(id)
-    super
-    if id == Gosu::KbSpace
-      target_tank = @tanks.reject do |t|
-        t == @camera.target
-      end.sample
-      switch_to_tank(target_tank)
-    end
   end
 end
