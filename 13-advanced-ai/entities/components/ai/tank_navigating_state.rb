@@ -1,10 +1,7 @@
-class TankStuckState < TankMotionState
-  attr_accessor :stuck_at
-  def initialize(object, vision, gun)
-    super(object, vision)
+class TankNavigatingState < TankMotionState
+  def initialize(object, vision)
     @object = object
     @vision = vision
-    @gun = gun
   end
 
   def update
@@ -13,19 +10,13 @@ class TankStuckState < TankMotionState
   end
 
   def change_direction
-    closest_free_path = @vision.closest_free_path_away_from(
-      @stuck_at)
+    closest_free_path = @vision.closest_free_path
     if closest_free_path
       @object.physics.change_direction(
         Utils.angle_between(
           @object.x, @object.y, *closest_free_path))
     else
-      if @object.health.health > 50 && rand > 0.9
-        @object.shoot(*Utils.point_at_distance(
-          *@object.location,
-          @object.gun_angle,
-          150))
-      end
+      puts "could not navigate!"
     end
     @changed_direction_at = Gosu.milliseconds
     @will_keep_direction_for = turn_time
@@ -40,6 +31,6 @@ class TankStuckState < TankMotionState
   end
 
   def turn_time
-    rand(1000..2000)
+    rand(300..1000)
   end
 end

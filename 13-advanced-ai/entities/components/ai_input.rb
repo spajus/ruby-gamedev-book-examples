@@ -1,7 +1,7 @@
 class AiInput < Component
   # Dark red
   NAME_COLOR = Gosu::Color.argb(0xeeb10000)
-  UPDATE_RATE = 500 # ms
+  UPDATE_RATE = 10 # ms
   attr_reader :name
   attr_reader :stats
 
