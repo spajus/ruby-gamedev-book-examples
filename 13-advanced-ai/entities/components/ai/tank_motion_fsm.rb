@@ -70,7 +70,6 @@ class TankMotionFSM
       @last_location = @object.location
     end
     if now - @last_location_update > LOCATION_CHECK_DELAY
-      puts "checkin location"
       unless @last_location.nil? || @current_state.waiting?
         if Utils.distance_between(*@last_location, *@object.location) < 20
           set_state(@stuck_state)

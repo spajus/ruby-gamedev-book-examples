@@ -41,24 +41,14 @@ class AiVision
             else
               return [x, y]
             end
-          else
-            puts "not found"
           end
         end
       end
     end
-    puts "no free path"
     false
   end
 
   alias :closest_free_path_away_from :closest_free_path
-
-  def farthest_from(paths, away_from)
-    paths.sort do |p1, p2|
-      Utils.distance_between(*p1, *away_from) <=>
-        Utils.distance_between(*p2, *away_from)
-    end.first
-  end
 
   def closest_tank
     now = Gosu.milliseconds
@@ -81,6 +71,13 @@ class AiVision
   end
 
   private
+
+  def farthest_from(paths, away_from)
+    paths.sort do |p1, p2|
+      Utils.distance_between(*p1, *away_from) <=>
+        Utils.distance_between(*p2, *away_from)
+    end.first
+  end
 
   def find_closest_powerup(*suitable)
     if suitable.empty?

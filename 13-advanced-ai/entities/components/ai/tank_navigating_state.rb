@@ -15,8 +15,6 @@ class TankNavigatingState < TankMotionState
       @object.physics.change_direction(
         Utils.angle_between(
           @object.x, @object.y, *closest_free_path))
-    else
-      puts "could not navigate!"
     end
     @changed_direction_at = Gosu.milliseconds
     @will_keep_direction_for = turn_time
