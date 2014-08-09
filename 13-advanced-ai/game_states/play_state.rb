@@ -9,7 +9,7 @@ class PlayState < GameState
     @map = Map.new(@object_pool)
     @camera = Camera.new
     @object_pool.camera = @camera
-    create_tanks(1)
+    create_tanks(7)
   end
 
   def update
