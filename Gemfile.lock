@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.2.5)
-    gosu (0.7.50)
+    gosu (0.8.5)
     gosu_texture_packer (0.1.4)
       gosu
       json
@@ -18,21 +18,21 @@ GEM
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
       rspec-mocks (~> 3.0.0)
-    rspec-core (3.0.3)
+    rspec-core (3.0.4)
       rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.3)
+    rspec-expectations (3.0.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.3)
+    rspec-mocks (3.0.4)
       rspec-support (~> 3.0.0)
-    rspec-support (3.0.3)
-    ruby-prof (0.15.1)
+    rspec-support (3.0.4)
+    ruby-prof (0.15.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  gosu (~> 0.7.50)
+  gosu
   gosu_texture_packer
   gosu_tiled
   perlin_noise
