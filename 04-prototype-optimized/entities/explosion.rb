@@ -9,11 +9,11 @@ class Explosion
 
   def sound
     @@sound ||= Gosu::Sample.new(
-      $window, Game.media_path('explosion.mp3'))
+      $window, Game.media_path('explosion.ogg'))
   end
 
   def initialize(x, y)
-    sound.play
+    sound.play if sound
     @x, @y = x, y
     @current_frame = 0
   end

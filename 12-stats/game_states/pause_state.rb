@@ -10,21 +10,25 @@ class PauseState < GameState
   end
 
   def enter
-    music.play(true)
-    music.volume = 1
+    if music
+      music.play(true)
+      music.volume = 1
+    end
     @score_display = ScoreDisplay.new(@play_state.object_pool)
     @mouse_coords = [$window.mouse_x, $window.mouse_y]
   end
 
   def leave
-    music.volume = 0
-    music.stop
+    if music
+      music.volume = 0
+      music.stop
+    end
     $window.mouse_x, $window.mouse_y = @mouse_coords
   end
 
   def music
     @@music ||= Gosu::Song.new(
-      $window, Utils.media_path('menu_music.mp3'))
+      $window, Utils.media_path('menu_music.ogg'))
   end
 
   def draw

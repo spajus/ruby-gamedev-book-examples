@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="01-hello"/>
+	<buildpathentry kind="src" path="02-warmup"/>
+	<buildpathentry kind="src" path="03-prototype"/>
+	<buildpathentry kind="src" path="04-prototype-optimized"/>
+	<buildpathentry kind="src" path="05-refactor"/>
+	<buildpathentry kind="src" path="06-physics"/>
+	<buildpathentry kind="src" path="07-damage"/>
+	<buildpathentry kind="src" path="08-ai"/>
+	<buildpathentry kind="src" path="09-polishing"/>
+	<buildpathentry kind="src" path="10-partitioning"/>
+	<buildpathentry kind="src" path="11-powerups"/>
+	<buildpathentry kind="src" path="12-stats"/>
+	<buildpathentry kind="src" path="13-advanced-ai"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.launching.INTERPRETER_CONTAINER"/>
+</buildpath>

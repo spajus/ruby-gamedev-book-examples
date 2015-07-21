@@ -10,7 +10,7 @@ class Bullet
     if trajectory_length > MAX_DIST
       @target_x, @target_y = point_at_distance(MAX_DIST)
     end
-    sound.play
+    sound.play if sound
   end
 
   def draw
@@ -54,7 +54,7 @@ class Bullet
 
   def sound
     @@sound ||= Gosu::Sample.new(
-      $window, Game.media_path('fire.mp3'))
+      $window, Game.media_path('fire.ogg'))
   end
 
   def trajectory_length
