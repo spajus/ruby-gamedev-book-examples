@@ -12,8 +12,8 @@ GEM
       json
     json (1.8.1)
     perlin_noise (0.1.2)
-    rake (10.3.2)
-    rmagick (2.15.2)
+    rake (10.4.2)
+    rmagick (2.15.4)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
