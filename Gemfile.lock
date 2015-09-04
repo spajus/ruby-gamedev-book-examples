@@ -3,39 +3,43 @@ GEM
   specs:
     diff-lcs (1.2.5)
     gosu (0.9.2)
-    gosu_texture_packer (0.1.4)
+    gosu_texture_packer (0.1.6)
       gosu
       json
       rmagick
     gosu_tiled (0.1.1)
       gosu
       json
-    json (1.8.1)
+    json (1.8.3)
     perlin_noise (0.1.2)
     rake (10.4.2)
     rmagick (2.15.4)
-    rspec (3.0.0)
-      rspec-core (~> 3.0.0)
-      rspec-expectations (~> 3.0.0)
-      rspec-mocks (~> 3.0.0)
-    rspec-core (3.0.4)
-      rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.4)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+    rspec-core (3.3.2)
+      rspec-support (~> 3.3.0)
+    rspec-expectations (3.3.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.4)
-      rspec-support (~> 3.0.0)
-    rspec-support (3.0.4)
-    ruby-prof (0.15.2)
+      rspec-support (~> 3.3.0)
+    rspec-mocks (3.3.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-support (3.3.0)
+    ruby-prof (0.15.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  gosu
-  gosu_texture_packer
-  gosu_tiled
-  perlin_noise
-  rake
-  rspec (~> 3.0.0)
-  ruby-prof
+  gosu (~> 0.9.2)
+  gosu_texture_packer (~> 0.1.6)
+  gosu_tiled (~> 0.1.1)
+  perlin_noise (~> 0.1.2)
+  rake (~> 10.4.2)
+  rspec (~> 3.3.0)
+  ruby-prof (~> 0.15.8)
+
+BUNDLED WITH
+   1.10.6
