@@ -4,7 +4,7 @@ class TankSounds < Component
       if @driving && @driving.paused?
         @driving.resume
       elsif @driving.nil?
-        @driving = driving_sound.play(0.1, 1, true)
+        @driving = driving_sound.play(0.1, 1, true) if driving_sound
       end
     else
       if @driving && @driving.playing?
@@ -14,14 +14,14 @@ class TankSounds < Component
   end
 
   def collide
-    crash_sound.play(0.3, 0.25, false)
+    crash_sound.play(0.3, 0.25, false) if crash_sound
   end
 
   private
 
   def driving_sound
     @@driving_sound ||= Gosu::Sample.new(
-      $window, Utils.media_path('tank_driving.mp3'))
+      $window, Utils.media_path('tank_driving.ogg'))
   end
 
   def crash_sound

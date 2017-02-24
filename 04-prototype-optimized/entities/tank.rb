@@ -13,12 +13,12 @@ class Tank
     @body_angle = 0.0
     @gun_angle = 0.0
     @last_shot = 0
-    sound.volume = 0.3
+    sound.volume = 0.3 if sound
   end
 
   def sound
     @@sound ||= Gosu::Song.new(
-      $window, Game.media_path('tank_driving.mp3'))
+      $window, Game.media_path('tank_driving.ogg'))
   end
 
   def shoot(target_x, target_y)
@@ -48,9 +48,9 @@ class Tank
       Gosu::KbW, Gosu::KbS, Gosu::KbA, Gosu::KbD)
 
     if moving?
-      sound.play(true)
+      sound.play(true) if sound
     else
-      sound.pause
+      sound.pause if sound
     end
 
     if $window.button_down?(Gosu::MsLeft)

@@ -10,15 +10,19 @@ class TankSounds < Component
       move_volume = Utils.volume(
         object, @object_pool.camera)
       pan = Utils.pan(object, @object_pool.camera)
-      if driving_sound.paused?(id)
-        driving_sound.resume(id)
-      elsif driving_sound.stopped?(id)
-        driving_sound.play(id, pan, 0.5, 1, true)
+      if driving_sound
+        if driving_sound.paused?(id)
+          driving_sound.resume(id)
+        elsif driving_sound.stopped?(id)
+          driving_sound.play(id, pan, 0.5, 1, true)
+        end
+        driving_sound.volume_and_pan(id, move_volume * 0.5, pan)
       end
-      driving_sound.volume_and_pan(id, move_volume * 0.5, pan)
     else
-      if driving_sound.playing?(id)
-        driving_sound.pause(id)
+      if driving_sound
+        if driving_sound.playing?(id)
+          driving_sound.pause(id)
+        end
       end
     end
   end
@@ -26,14 +30,14 @@ class TankSounds < Component
   def collide
     vol, pan = Utils.volume_and_pan(
       object, @object_pool.camera)
-    crash_sound.play(self.object_id, pan, vol, 1, false)
+    crash_sound.play(self.object_id, pan, vol, 1, false) if crash_sound
   end
 
   private
 
   def driving_sound
     @@driving_sound ||= StereoSample.new(
-      $window, Utils.media_path('tank_driving.mp3'))
+      $window, Utils.media_path('tank_driving.ogg'))
   end
 
   def crash_sound

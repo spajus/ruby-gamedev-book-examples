@@ -10,18 +10,22 @@ class MenuState < GameState
   end
 
   def enter
-    music.play(true)
-    music.volume = 1
+    if music
+      music.play(true)
+      music.volume = 1
+    end
   end
 
   def leave
-    music.volume = 0
-    music.stop
+    if music
+      music.volume = 0
+      music.stop
+    end
   end
 
   def music
     @@music ||= Gosu::Song.new(
-      $window, Utils.media_path('menu_music.mp3'))
+      $window, Utils.media_path('menu_music.ogg'))
   end
 
   def update
