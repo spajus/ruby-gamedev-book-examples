@@ -1,6 +1,6 @@
 ## Source code examples from "Developing Games With Ruby" book
 
-[Get the book](https://leanpub.com/developing-games-with-ruby/)
+[Get the book for free](https://leanpub.com/developing-games-with-ruby/)
 
 ## Are you a game developer, or want to be one?
 
